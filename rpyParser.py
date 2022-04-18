@@ -74,10 +74,3 @@ class RpyScene:
         for l in self.sceneContent:
             s += "    %s\n"%l
         return s
-
-proj = Project("test")
-#proj = openProject("test2")
-proj.parseProjectJSON()
-proj.writeScriptToFile()
-#testScene = RpyScene("start", ['\"hello\"', '\"goodbye\"'])
-#testProject.writeScriptToFile([testScene])
