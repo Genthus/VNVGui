@@ -1,2 +1,3 @@
 # ignore all project files
 ./projects/*
+except ./projects/projects.json
