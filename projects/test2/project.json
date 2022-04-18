@@ -1,0 +1,20 @@
+{
+    "projectName" : "",
+    "characters" : [
+
+    ],
+    "scenes" : {
+        "start" : [
+            "\"welcome to RenpyGUI\"",
+            "\"this is the test Scene\"",
+            "goto intro"
+        ],
+        "intro" : [
+            "\"You can edit this script as you want\"",
+            "\"Good luck\""
+        ]
+    },
+    "options" : [
+
+    ]
+}
