@@ -1,3 +1,8 @@
 # ignore all project files
-./projects/*
+projects/*
 except ./projects/projects.json
+
+# parsing testing file
+testing.py
+# python cache folder
+__pycache__
