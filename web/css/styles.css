@@ -1,0 +1,229 @@
+.sceneEditor {
+    position: relative;
+    width: 1440px;
+    height: 1024px;
+    
+    background: #FFFFFF;
+}
+
+.navBar {
+    position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 89.94%;
+}
+
+.optionBar {
+    position: absolute;
+    width: 1440px;
+    height: 90px;
+    left: 0px;
+    top: 0px;
+}
+
+/* Auto layout */
+.autoLayout {
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px 4px;
+    
+    position: absolute;
+    width: 408px;
+    height: 45px;
+    left: 43px;
+    top: 52px;
+}
+
+.myButton {
+    position: static;
+    width: 76px;
+    height: 30px;
+    left: 4px;
+    top: 10px;
+}
+
+/* Inside auto layout */
+.insideAutoLayout {
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 5px;
+}
+
+/* File */
+.optionButton {
+
+    position: absolute;
+    width: 76px;
+    height: 30px;
+    left: 4px;
+    top: 10px;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #000000;
+}
+
+.sceneTitle {
+
+    position: absolute;
+    width: 619px;
+    height: 32.42px;
+    left: 43px;
+    top: 19px;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #000000;
+}
+
+/* Dialogue Editor */
+
+.dialogueEditorTitle {
+
+    position: absolute;
+    width: 845px;
+    height: 884px;
+    left: 0px;
+    top: -8px;
+    overflow-y: scroll;
+}
+
+
+
+/* Dialogue Boxes */
+
+/* Auto layout */
+.dialogueBoxAutoLayout {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    
+    position: absolute;
+    width: 798px;
+    height: 1068.96px;
+    left: 19px;
+    top: 18px;
+}
+
+
+
+/* Dialogue box */
+
+.dialogueBox {
+
+    position: static;
+    width: 798px;
+    height: 153.57px;
+    left: 0px;
+    top: 0px;
+}
+
+
+/* Inside auto layout */
+.dialogueBoxInsideAutoLayout {
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 33px 0px;
+}
+
+
+/* Dialogue Box */
+
+.dialogueBox2 {
+    
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 85.63%;
+    
+    background: #EDEDED;
+    border-radius: 11px;
+}
+
+
+/* Dialogue text */
+
+.dialogueText {
+
+    position: absolute;
+    left: 3.38%;
+    right: 4.01%;
+    top: 4.82%;
+    bottom: 87.63%;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    
+    color: #000000;
+}
+
+
+
+/* Character name */
+
+.characterName {
+
+    position: absolute;
+    left: 3.38%;
+    right: 4.01%;
+    top: 1.57%;
+    bottom: 96.33%;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+color: #000000;
+
+/* End text */
+
+.endText {
+
+    position: absolute;
+    width: 798px;
+    height: 51.56px;
+    left: 0px;
+    top: 1017.4px;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #000000;
+}
+
