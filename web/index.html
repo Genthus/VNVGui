@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type=”text/javascript” src=”/eel.js”></script>
         <script src="./script.js"></script>
+        <link rel="stylesheet" href="css/styles.css">
         <title>RenpyGUI</title>
     </head>
-    <style>
-        .test {
-            font-size: 3em;
-        }
-    </style>
     <body>
-        <h1>Pagina</h1>
-        <button>Saludar</button>
-        <div class="test"></div>
+        <div class="sceneEditor">
+            <nav class="optionsBar"></nav>
+            <div class="dialogueView">
+                <div class="dialogueBoxes">
+                    <div class="dialogueBox">
+                        <h2>Character name</h4>
+                        <p>text</p>
+                    </div>
+                </div>
+            </div>
+            <div class="dialogueOptions">
+                <div class="dialogueBoxes">
+                    <div class="dialogueOptionBox"></div>
+                </div>
+            </div>
+            <div class="gamePreview"></div>
+        </div>
     </body>
 </html>

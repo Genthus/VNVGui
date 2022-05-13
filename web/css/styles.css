@@ -1,123 +1,28 @@
 .sceneEditor {
-    position: relative;
-    width: 1440px;
-    height: 1024px;
-    
-    background: #FFFFFF;
-}
-
-.navBar {
     position: absolute;
-left: 0%;
-right: 0%;
-top: 0%;
-bottom: 89.94%;
-}
-
-.optionBar {
-    position: absolute;
-    width: 1440px;
-    height: 90px;
-    left: 0px;
-    top: 0px;
-}
-
-/* Auto layout */
-.autoLayout {
-
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 10px 4px;
+    width: 1920px;
+    height: 1080px;
     
-    position: absolute;
-    width: 408px;
-    height: 45px;
-    left: 43px;
-    top: 52px;
+    background: #a5a5a5;
 }
 
-.myButton {
-    position: static;
-    width: 76px;
-    height: 30px;
-    left: 4px;
-    top: 10px;
-}
-
-/* Inside auto layout */
-.insideAutoLayout {
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 0px 5px;
-}
-
-/* File */
-.optionButton {
-
-    position: absolute;
-    width: 76px;
-    height: 30px;
-    left: 4px;
-    top: 10px;
-    
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 21px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    
-    color: #000000;
-}
-
-.sceneTitle {
-
-    position: absolute;
-    width: 619px;
-    height: 32.42px;
-    left: 43px;
-    top: 19px;
-    
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 21px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    
-    color: #000000;
-}
-
-/* Dialogue Editor */
-
-.dialogueEditorTitle {
-
-    position: absolute;
-    width: 845px;
-    height: 884px;
-    left: 0px;
-    top: -8px;
+.dialogueView {
+    position:absolute;
+    width: 1200px;
+    height: 900px;
+    margin: 40px;
+    margin-top: 150px;
     overflow-y: scroll;
+    background: #D0D0D0;
+    border-radius: 11px;
 }
 
-
-
-/* Dialogue Boxes */
-
-/* Auto layout */
-.dialogueBoxAutoLayout {
-
+.dialogueBoxes {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 0px;
+    gap: 33px;
     
     position: absolute;
     width: 798px;
@@ -126,104 +31,80 @@ bottom: 89.94%;
     top: 18px;
 }
 
-
-
-/* Dialogue box */
-
 .dialogueBox {
-
-    position: static;
-    width: 798px;
-    height: 153.57px;
-    left: 0px;
-    top: 0px;
-}
-
-
-/* Inside auto layout */
-.dialogueBoxInsideAutoLayout {
-
+    width: 1160px;
+    height: 150px;
     flex: none;
     order: 0;
     flex-grow: 0;
-    margin: 33px 0px;
-}
-
-
-/* Dialogue Box */
-
-.dialogueBox2 {
-    
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 85.63%;
-    
     background: #EDEDED;
     border-radius: 11px;
 }
 
-
-/* Dialogue text */
-
-.dialogueText {
-
+.dialogueBox h2 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
     position: absolute;
     left: 3.38%;
     right: 4.01%;
-    top: 4.82%;
+    top: 0.2%;
+    bottom: 96.33%;
+}
+
+.dialogueBox p {
+    position: absolute;
+    left: 3.38%;
+    right: 4.01%;
+    top: 3.50%;
     bottom: 87.63%;
     
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 16px;
     line-height: 14px;
-    
-    color: #000000;
 }
 
-
-
-/* Character name */
-
-.characterName {
-
+.optionsBar {
     position: absolute;
-    left: 3.38%;
-    right: 4.01%;
-    top: 1.57%;
-    bottom: 96.33%;
-    
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 21px;
-}
-
-color: #000000;
-
-/* End text */
-
-.endText {
-
-    position: absolute;
-    width: 798px;
-    height: 51.56px;
+    width: 1920px;
+    height: 90px;
     left: 0px;
-    top: 1017.4px;
-    
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 21px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    
-    color: #000000;
+    top: 0px;
+    background: #D0D0D0;
 }
 
+.dialogueOptions {
+    position: absolute;
+    width: 600px;
+    height: 500px;
+    right: 40px;
+    bottom: 30px;
+    overflow-y: scroll;
+    background: #C4C4C4;
+    border-radius: 11px;
+}
+
+.dialogueOptionBox {
+    width: 560px;
+    height: 150px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    background: #EDEDED;
+    border-radius: 11px;
+}
+
+.gamePreview {
+    position: absolute;
+    width: 600px;
+    height: 350px;
+    right: 40px;
+    margin-top: 150px;
+    overflow-y: scroll;
+    background: #C4C4C4;
+    border-radius: 11px;
+}
