@@ -7,7 +7,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "vue-cli-service build && electron ."
+    "start": "vue-cli-service build && electron .",
+    "dev": "vue-cli-service serve && electron ."
   },
   "dependencies": {
     "core-js": "^3.8.3",

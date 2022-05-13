@@ -3,8 +3,12 @@ from os.path import exists
 import shutil
 import json
 
-projectsFolder = "./projects/"
+projectsFolder = "../projects/"
 baseProjectFolder = "./defs/base/"
+
+def getProjectJson(name):
+    with open(projectsFolder+name+"/project.json", 'r') as f:
+        return json.load(f)
 
 class Project:
     name = ""
