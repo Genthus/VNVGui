@@ -1,6 +1,6 @@
 # ignore all project files
 projects/*
-except ./projects/projects.json
+!projects/example
 
 # parsing testing file
 testing.py

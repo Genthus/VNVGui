@@ -1,0 +1,65 @@
+{
+    "projectName" : "",
+    "characters" : [
+
+    ],
+    "scenes" : [
+        {
+            "id": 0,
+            "name": "start",
+            "lines": [
+                {
+                    "id": 0,
+                    "type": "text",
+                    "character": "Renpy Helper",
+                    "text": "\"welcome to RenpyGUI\""
+                },
+                {
+                    "id": 1,
+                    "type": "text",
+                    "character": "Renpy Helper",
+                    "text": "\"this is the test Scene\""
+                },
+                {
+                    "id": 2,
+                    "type": "text",
+                    "character": "Renpy Helper",
+                    "text": "\"this is the test Scene\""
+                },
+                {
+                    "id": 3,
+                    "type": "jump",
+                    "character": "",
+                    "text": "intro"
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "name": "second start",
+            "lines": [
+                {
+                    "id": 0,
+                    "type": "text",
+                    "character": "Renpy Helper",
+                    "text": "\"welcome to RenpyGUI\""
+                },
+                {
+                    "id": 1,
+                    "type": "text",
+                    "character": "Renpy Helper",
+                    "text": "\"this is the test Scene\""
+                },
+                {
+                    "id": 2,
+                    "type": "jump",
+                    "character": "",
+                    "text": "intro"
+                }
+            ]
+        }
+    ],
+    "options" : [
+
+    ]
+}
