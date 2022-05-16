@@ -1,6 +1,6 @@
 <template>
     <div class="sceneEditor">
-        <dialogueView :dialogues="sceneDialogues"/>
+        <dialogueView :dialogues="lines"/>
     </div>
 </template>
 
@@ -13,26 +13,31 @@ export default {
     },
     data() {
         return {
-            sceneDialogues: []
+            id: 0,
+            name: "",
+            lines: []
         }
     },
     methods: {
-        loadDialogues() {
-            fetch("http://localhost:5000/testDialogues").then(response => {
+        loadDialogues(sceneId) {
+            fetch("http://localhost:5000/testProject").then(response => {
                 if (!response.ok) {
                     throw new Error("Request failed")
                 }
                 return response.json()
             })
             .then(data => {
-                console.log(data.dialogues)
-                this.sceneDialogues = data.dialogues.start
+                const scene = data.scenes[sceneId]
+                console.log(scene)
+                this.id = scene.id
+                this.name = scene.name
+                this.lines = scene.lines
             })
             .catch(error => console.log(error))
         }
     },
     created() {
-        this.loadDialogues()
+        this.loadDialogues(this.$route.params.id)
     }
 }
 </script>
@@ -42,6 +47,6 @@ export default {
     position: absolute;
     width: 1920px;
     height: 1080px;
-    background: #5c2525;
+    background: #ffffff;
 }
 </style>

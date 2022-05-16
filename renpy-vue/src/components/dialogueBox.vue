@@ -1,8 +1,16 @@
 <template>
     <div class="dialogueBox">
-        <h3>{{dialogue.type}}</h3>
-        <h2>{{dialogue.character}}</h2>
-        <p>{{dialogue.text}}</p>
+        <form action="">
+            <div class="type">
+                <h3>{{newDialogue.type}}</h3>
+            </div>
+            <div class="character">
+                <input v-model="newDialogue.character" placeholder="{{newDialogue.character}}"/>
+            </div>
+            <div class="text">
+                <textarea v-model="newDialogue.text" placeholder="{{newDialogue.text}}"></textarea>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -11,6 +19,14 @@ export default {
     name: 'dialogueBox',
     props: {
         dialogue: Object,
+    },
+    data() {
+        return {
+            newDialogue : Object
+        }
+    },
+    created() {
+        this.newDialogue = this.dialogue
     }
 }
 </script>
@@ -24,27 +40,18 @@ export default {
     flex-grow: 0;
     background: #EDEDED;
     border-radius: 11px;
+    justify-content: left;
 }
 
-.dialogueBox h2 {
+.character {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 21px;
-    position: relative;
-    left: 3.38%;
-    right: 4.01%;
-    top: 0.2%;
-    bottom: 96.33%;
 }
 
-.dialogueBox p {
-    position: relative;
-    left: 3.38%;
-    right: 4.01%;
-    top: 3.50%;
-    bottom: 87.63%;
+.text  {
     
     font-family: 'Roboto';
     font-style: normal;
