@@ -3,15 +3,18 @@
         <div class="dialogueBoxes" :key="dialogue.id" v-for="dialogue in dialogues">
             <dialogueBox :dialogue="dialogue"/>
         </div>
+        <toolBox class="dialogueBoxes"/>
     </div>
 </template>
 
 <script>
 import dialogueBox from './dialogueBox.vue'
+import toolBox from './toolBox.vue'
 export default {
     name: 'dialogueView',
     components: {
-        dialogueBox
+        dialogueBox,
+        toolBox
     },
     props: {
         dialogues: Array

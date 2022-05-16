@@ -4,7 +4,10 @@
             <div class="type">
                 <h3>{{newDialogue.type}}</h3>
             </div>
-            <div class="character">
+            <div class="idNumber">
+                <input type="number" v-model="newDialogue.id" placeholder="newDialogue.id">
+            </div>
+            <div class="character" v-if="newDialogue.type === 'text'">
                 <input v-model="newDialogue.character" placeholder="{{newDialogue.character}}"/>
             </div>
             <div class="text">
@@ -31,7 +34,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .dialogueBox {
     width: 1160px;
     height: 150px;
