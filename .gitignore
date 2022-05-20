@@ -7,4 +7,4 @@ testing.py
 # python cache folder
 __pycache__
 # venv variables
-pyvenv.cfg
+server/venv/pyvenv.cfg
