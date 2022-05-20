@@ -1,7 +1,7 @@
 <template>
     <div class="dialoguetoolBox">
         <div class="buttons">
-            <button>Button</button>
+            <button @click="$emit('save')">Save</button>
             <button>Button</button>
             <button>Button</button>
             <button>Button</button>

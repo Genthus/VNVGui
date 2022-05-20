@@ -1,9 +1,9 @@
 <template>
     <div class="dialogueView">
         <div class="dialogueBoxes" :key="dialogue.id" v-for="dialogue in dialogues">
-            <dialogueBox :dialogue="dialogue"/>
+            <dialogueBox @updateDialogue="updateDialogue" :dialogue="dialogue"/>
         </div>
-        <toolBox class="dialogueBoxes"/>
+        <toolBox @save="$emit('save')" class="dialogueBoxes"/>
     </div>
 </template>
 
@@ -18,6 +18,11 @@ export default {
     },
     props: {
         dialogues: Array
+    },
+    methods: {
+        updateDialogue(dialg) {
+            this.$emit('updateDialogue',dialg)
+        },
     }
 }
 </script>

@@ -5,13 +5,13 @@
                 <h3>{{newDialogue.type}}</h3>
             </div>
             <div class="idNumber">
-                <input type="number" v-model="newDialogue.id" placeholder="newDialogue.id">
+                <input @change="updateDialogue" type="number" v-model="newDialogue.id" placeholder="newDialogue.id">
             </div>
             <div class="character" v-if="newDialogue.type === 'text'">
-                <input v-model="newDialogue.character" placeholder="{{newDialogue.character}}"/>
+                <input @change="updateDialogue" v-model="newDialogue.character" placeholder="{{newDialogue.character}}"/>
             </div>
             <div class="text">
-                <textarea v-model="newDialogue.text" placeholder="{{newDialogue.text}}"></textarea>
+                <textarea @change="updateDialogue" v-model="newDialogue.text" placeholder="{{newDialogue.text}}"></textarea>
             </div>
         </form>
     </div>
@@ -25,11 +25,13 @@ export default {
     },
     data() {
         return {
-            newDialogue : Object
+            newDialogue : this.dialogue
         }
     },
-    created() {
-        this.newDialogue = this.dialogue
+    methods: {
+        updateDialogue() {
+            this.$emit('updateDialogue',this.newDialogue)
+        }
     }
 }
 </script>

@@ -6,9 +6,22 @@ import json
 projectsFolder = "../projects/"
 baseProjectFolder = "./defs/base/"
 
-def getProjectJson(name):
-    with open(projectsFolder+name+"/project.json", 'r') as f:
+def getProjectJson(proJname):
+    with open(projectsFolder+proJname+"/project.json", 'r') as f:
         return json.load(f)
+
+def overWriteScene(proJname, scene):
+    with open(projectsFolder+proJname+"/project.json", 'r+') as f:
+        data = json.load(f)
+        if (data["scenes"][scene["id"]]):
+            data["scenes"][scene["id"]] = scene
+            f.seek(0)
+            f.truncate()
+            json.dump(data, f)
+            return True
+        else:
+            print("Scene " + scene.name + " not found, overwrite failed")
+            return False
 
 class Project:
     name = ""

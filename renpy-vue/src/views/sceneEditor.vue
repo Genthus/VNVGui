@@ -1,6 +1,6 @@
 <template>
     <div class="sceneEditor">
-        <dialogueView :dialogues="lines"/>
+        <dialogueView @save="saveScene" @updateDialogue="updateDialogue" :dialogues="lines"/>
     </div>
 </template>
 
@@ -34,6 +34,19 @@ export default {
                 this.lines = scene.lines
             })
             .catch(error => console.log(error))
+        },
+        async saveScene() {
+            await fetch("http://localhost:5000/saveScene", {
+                method: 'POST',
+                headers: {
+                    'Accept' : 'application/json',
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify({'id': this.id, 'name': this.name,'lines': this.lines})
+            });
+        },
+        updateDialogue(dialg) {
+            this.lines[dialg.id] = dialg;
         }
     },
     created() {
