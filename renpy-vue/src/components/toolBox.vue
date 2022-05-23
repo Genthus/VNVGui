@@ -3,8 +3,6 @@
         <div class="buttons">
             <button @click="$emit('save')">Save</button>
             <button @click="$emit('addDialogue')">New Line</button>
-            <button>Button</button>
-            <button>Button</button>
         </div>
     </div>
 </template>
@@ -29,6 +27,12 @@ export default {
 }
 
 .buttons {
+    padding: 2%;
     display:flex;
+    justify-content: center;
+}
+
+button {
+    margin: 1%;
 }
 </style>
