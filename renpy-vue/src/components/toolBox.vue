@@ -2,7 +2,7 @@
     <div class="dialoguetoolBox">
         <div class="buttons">
             <button @click="$emit('save')">Save</button>
-            <button>Button</button>
+            <button @click="$emit('addDialogue')">New Line</button>
             <button>Button</button>
             <button>Button</button>
         </div>

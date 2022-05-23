@@ -2,7 +2,7 @@
     <div class="dialogueBox">
         <form action="">
             <div class="type">
-                <h3>{{newDialogue.type}}</h3>
+                <input @change="updateDialogue" v-model="newDialogue.type" placeholder="newDialogue.type">
             </div>
             <div class="idNumber">
                 <input @change="updateDialogue" type="number" v-model="newDialogue.id" placeholder="newDialogue.id">
@@ -13,6 +13,7 @@
             <div class="text">
                 <textarea @change="updateDialogue" v-model="newDialogue.text" placeholder="{{newDialogue.text}}"></textarea>
             </div>
+            <button @click="$emit('deleteDialogue')">Delete</button>
         </form>
     </div>
 </template>

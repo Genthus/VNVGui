@@ -1,9 +1,14 @@
 <template>
     <div class="dialogueView">
         <div class="dialogueBoxes" :key="dialogue.id" v-for="dialogue in dialogues">
-            <dialogueBox @updateDialogue="updateDialogue" :dialogue="dialogue"/>
+            <dialogueBox 
+            @updateDialogue="updateDialogue" 
+            @deleteDialogue="$emit('deleteDialogue', dialogue.id)"
+            :dialogue="dialogue"/>
         </div>
-        <toolBox @save="$emit('save')" class="dialogueBoxes"/>
+        <toolBox @save="$emit('save')" 
+        @addDialogue="$emit('addDialogue')" 
+        class="dialogueBoxes"/>
     </div>
 </template>
 
@@ -32,15 +37,15 @@ export default {
     position:absolute;
     width: 1200px;
     height: 900px;
-    margin: 40px;
-    margin-top: 150px;
+    margin: 2%;
+    margin-top: 2%;
     overflow-y: scroll;
     background: #D0D0D0;
     border-radius: 11px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 0px;
+    padding: 1% 00px;
     gap: 5px;
 }
 .dialogueBoxes {

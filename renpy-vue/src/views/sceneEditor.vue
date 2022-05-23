@@ -1,6 +1,10 @@
 <template>
     <div class="sceneEditor">
-        <dialogueView @save="saveScene" @updateDialogue="updateDialogue" :dialogues="lines"/>
+        <dialogueView @save="saveScene" 
+        @updateDialogue="updateDialogue" 
+        @addDialogue="addDialogue" 
+        @deleteDialogue="deleteDialogue"
+        :dialogues="lines"/>
     </div>
 </template>
 
@@ -47,6 +51,18 @@ export default {
         },
         updateDialogue(dialg) {
             this.lines[dialg.id] = dialg;
+        },
+        addDialogue() {
+            const newDialg = {
+                id: this.lines.length,
+                character: '',
+                text: '',
+                type: ''
+            }
+            this.lines.push(newDialg);
+        },
+        deleteDialogue(i) {
+            console.log(this.lines.splice(i,1));
         }
     },
     created() {
