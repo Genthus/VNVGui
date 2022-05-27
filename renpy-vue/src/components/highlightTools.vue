@@ -1,37 +1,36 @@
 <template>
-    <div class="dialoguetoolBox">
+    <div class="bar">
         <div class="buttons">
-            <button @click="$emit('save')">Save</button>
-            <button @click="$emit('addDialogue')">New Line</button>
+            <button @click="$emit('addDialogueAt')">New Line</button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'toolBox',
+    name: 'highlightTools',
 }
 </script>
 
 <style scoped>
-.dialoguetoolBox {
+.bar {
     width: 1160px;
-    height: 100px;
+    height: 30px;
+    margin: 1% 0;
     flex: none;
     order: 0;
     flex-grow: 0;
-    background: #EDEDED;
+    background: #b8b8b8;
     border-radius: 11px;
     justify-content: left;
 }
 
 .buttons {
-    padding: 2%;
     display:flex;
     justify-content: center;
 }
 
 button {
-    margin: 1%;
+    margin: 3px 1%;
 }
 </style>

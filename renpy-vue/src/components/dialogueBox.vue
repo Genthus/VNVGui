@@ -32,8 +32,8 @@ export default {
     methods: {
         updateDialogue() {
             this.$emit('updateDialogue',this.newDialogue)
-        }
-    }
+        },
+    },
 }
 </script>
 
@@ -64,5 +64,9 @@ export default {
     font-weight: 400;
     font-size: 16px;
     line-height: 14px;
+}
+
+.highlight {
+    background: #b1bed6;
 }
 </style>

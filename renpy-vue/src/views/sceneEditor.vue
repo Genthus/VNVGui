@@ -3,6 +3,7 @@
         <dialogueView @save="saveScene" 
         @updateDialogue="updateDialogue" 
         @addDialogue="addDialogue" 
+        @addDialogueAt="addDialogueAt"
         @deleteDialogue="deleteDialogue"
         :dialogues="lines"/>
     </div>
@@ -19,7 +20,8 @@ export default {
         return {
             id: 0,
             name: "",
-            lines: []
+            lines: [],
+            uniqueId: 0
         }
     },
     methods: {
@@ -36,6 +38,9 @@ export default {
                 this.id = scene.id
                 this.name = scene.name
                 this.lines = scene.lines
+                this.lines.forEach(l => {
+                    l.uniqueId = this.uniqueId++;
+                });
             })
             .catch(error => console.log(error))
         },
@@ -55,11 +60,26 @@ export default {
         addDialogue() {
             const newDialg = {
                 id: this.lines.length,
+                type: '',
                 character: '',
-                text: '',
-                type: ''
+                text: ''
             }
             this.lines.push(newDialg);
+        },
+        addDialogueAt(pos) {
+            console.log(pos)
+            const newDialg = {
+                id: pos,
+                type: '',
+                character: '',
+                text: '',
+                uniqueId: this.uniqueId++
+            }
+            this.lines.splice(pos,0,newDialg);
+            for (let i = 0; i < this.lines.length; i++) {
+                this.lines[i].id = i;
+            }
+            console.log(this.lines)
         },
         deleteDialogue(i) {
             console.log(this.lines.splice(i,1));
