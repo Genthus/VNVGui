@@ -13,22 +13,17 @@
             v-if="dialogue.highlight == true" 
             @addDialogueAt="$emit('addDialogueAt',dialogue.id+1)"/>
         </div>
-        <toolBox @save="$emit('save')" 
-        @addDialogue="$emit('addDialogue')" 
-        class="dialogueBoxes"/>
     </div>
 </template>
 
 <script>
 import dialogueBox from './dialogueBox.vue'
-import toolBox from './toolBox.vue'
 import highlightTools from './highlightTools.vue'
 
 export default {
     name: 'dialogueView',
     components: {
         dialogueBox,
-        toolBox,
         highlightTools
     },
     props: {

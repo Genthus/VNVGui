@@ -20,7 +20,7 @@ export default {
     flex: none;
     order: 0;
     flex-grow: 0;
-    background: #b8b8b8;
+    background: #d3993d;
     border-radius: 11px;
     justify-content: left;
 }

@@ -67,7 +67,6 @@ export default {
             this.lines.push(newDialg);
         },
         addDialogueAt(pos) {
-            console.log(pos)
             const newDialg = {
                 id: pos,
                 type: '',
@@ -79,10 +78,9 @@ export default {
             for (let i = 0; i < this.lines.length; i++) {
                 this.lines[i].id = i;
             }
-            console.log(this.lines)
         },
         deleteDialogue(i) {
-            console.log(this.lines.splice(i,1));
+            this.lines.splice(i,1);
         }
     },
     created() {

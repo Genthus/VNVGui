@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import rpyParser
 
 app = Flask(__name__)
 projectName = 'test'
+CORS(app)
 
 @app.route("/testDialogues")
 def testDialogues():

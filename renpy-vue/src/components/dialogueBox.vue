@@ -1,6 +1,14 @@
 <template>
-    <div class="dialogueBox">
-        <form action="">
+    <div class="dialogueBox" :class="newDialogue.type">
+        <div class="typeButtons" v-if="newDialogue.type == ''">
+            <button @click="setType('text')">Text</button>
+            <button @click="setType('jump')">Jump</button>
+            <button @click="setType('show')">Show</button>
+            <button @click="setType('scene')">Scene</button>
+            <button @click="setType('script')">Script</button>
+            <button @click="$emit('deleteDialogue')">Delete</button>
+        </div>
+        <form action="" v-if="dialogue.type != ''">
             <div class="type">
                 <input @change="updateDialogue" v-model="newDialogue.type" placeholder="newDialogue.type">
             </div>
@@ -10,7 +18,7 @@
             <div class="character" v-if="newDialogue.type === 'text'">
                 <input @change="updateDialogue" v-model="newDialogue.character" placeholder="{{newDialogue.character}}"/>
             </div>
-            <div class="text">
+            <div class="textBox">
                 <textarea @change="updateDialogue" v-model="newDialogue.text" placeholder="{{newDialogue.text}}"></textarea>
             </div>
             <button @click="$emit('deleteDialogue')">Delete</button>
@@ -26,13 +34,16 @@ export default {
     },
     data() {
         return {
-            newDialogue : this.dialogue
+            newDialogue : this.dialogue,
         }
     },
     methods: {
         updateDialogue() {
             this.$emit('updateDialogue',this.newDialogue)
         },
+        setType(t) {
+            this.newDialogue.type = t;
+        }
     },
 }
 </script>
@@ -47,6 +58,10 @@ export default {
     background: #EDEDED;
     border-radius: 11px;
     justify-content: left;
+}
+
+form {
+    padding: 1%;
 }
 
 .character {
@@ -66,7 +81,31 @@ export default {
     line-height: 14px;
 }
 
-.highlight {
-    background: #b1bed6;
+.typeButtons {
+    padding: 2%;
+    display:flex;
+    justify-content: center;
+}
+
+.typeButtons button {
+    width: 100px;
+    height: 100px;
+    margin: 0 2%;
+}
+
+.text {
+    background: rgb(80, 126, 218);
+}
+.jump {
+    background: #92e052;
+}
+.show {
+    background: #e463d3;
+}
+.scene {
+    background: #e9d060;
+}
+.script {
+    background: #ee7171;
 }
 </style>
