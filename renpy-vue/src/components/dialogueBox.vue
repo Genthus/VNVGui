@@ -50,14 +50,14 @@ export default {
 
 <style scoped>
 .dialogueBox {
-    width: 1160px;
-    height: 150px;
+    width: 100%;
+    height: auto;
     flex: none;
     order: 0;
     flex-grow: 0;
     background: #EDEDED;
     border-radius: 11px;
-    justify-content: left;
+    justify-content: center;
 }
 
 form {

@@ -37,15 +37,14 @@ body {
 
 nav {
     position: static;
-    width: 1920px;
-    height: 90px;
-    left: 0px;
-    top: 0px;
+    width: 105%;
+    height: 5%;
+    top: 0;
     background: #D0D0D0;
 }
 
 .links {
-  padding: 30px;
+  padding: 1%;
 }
 
 nav a {

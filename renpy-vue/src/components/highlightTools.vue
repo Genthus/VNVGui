@@ -14,18 +14,16 @@ export default {
 
 <style scoped>
 .bar {
-    width: 1160px;
-    height: 30px;
-    margin: 1% 0;
+    width: 100%;
+    paddin:auto;
     flex: none;
-    order: 0;
-    flex-grow: 0;
     background: #d3993d;
     border-radius: 11px;
     justify-content: left;
 }
 
 .buttons {
+    top:50%;
     display:flex;
     justify-content: center;
 }

@@ -56,20 +56,19 @@ export default {
 <style scoped>
 .dialogueView {
     position:absolute;
-    width: 1200px;
-    height: 900px;
-    margin: 2%;
-    margin-top: 2%;
+    width: 75%;
+    height: 90%;
+    margin: 1%;
     overflow-y: scroll;
     background: #D0D0D0;
     border-radius: 11px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 1% 00px;
-    gap: 5px;
+    gap: 1%;
+    padding:1%;
 }
 .dialogueBoxes {
-    margin: 0px 20px;
+    width: 100%;
 }
 </style>
