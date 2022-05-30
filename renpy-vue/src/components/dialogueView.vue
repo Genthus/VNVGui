@@ -55,10 +55,9 @@ export default {
 
 <style scoped>
 .dialogueView {
-    position:absolute;
+    position:relative;
     width: 75%;
-    height: 90%;
-    margin: 1%;
+    height: 92%;
     overflow-y: scroll;
     background: #D0D0D0;
     border-radius: 11px;

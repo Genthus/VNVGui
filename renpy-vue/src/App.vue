@@ -27,6 +27,11 @@ body {
   background:#212122;
 }
 
+.container {
+  width: 100%;
+  height: 100%;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -36,10 +41,11 @@ body {
 }
 
 nav {
-    position: static;
-    width: 105%;
+    position: relative;
+    width: 100%;
     height: 5%;
     top: 0;
+    left:0;
     background: #D0D0D0;
 }
 

@@ -93,7 +93,8 @@ export default {
 .sceneEditor {
     position: absolute;
     width: 100%;
-    height: 94%;
+    height: 90%;
+    padding: 1%;
     background: #ffffff;
 }
 </style>
