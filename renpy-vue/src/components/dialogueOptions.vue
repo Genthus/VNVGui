@@ -23,7 +23,7 @@ export default {
     width: 22%;
     height: 92%;
     overflow-y: scroll;
-    background: rgb(184, 184, 184);
+    background: #2a2929;
     border-radius: 11px;
     display: flex;
     flex-direction: column;

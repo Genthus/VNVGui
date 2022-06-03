@@ -100,7 +100,7 @@ export default {
     width: 100%;
     height: 90%;
     padding: 1%;
-    background: #ffffff;
+    background: #121212;
     display: flex;
     flex-direction: row;
     gap: 1%;

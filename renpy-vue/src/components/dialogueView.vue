@@ -59,7 +59,7 @@ export default {
     width: 70%;
     height: 92%;
     overflow-y: scroll;
-    background: #D0D0D0;
+    background: #2a2929;
     border-radius: 11px;
     display: flex;
     flex-direction: column;

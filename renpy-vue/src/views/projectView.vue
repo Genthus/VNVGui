@@ -45,6 +45,6 @@ export default {
     height: 95%;
     top:5%;
     left:0%;
-    background: #ffffff;
+    background: #121212;
 }
 </style>
