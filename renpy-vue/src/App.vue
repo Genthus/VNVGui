@@ -41,7 +41,7 @@ body {
 }
 
 nav {
-    position: relative;
+    position:absolute;
     width: 100%;
     height: 5%;
     top: 0;

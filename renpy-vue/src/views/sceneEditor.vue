@@ -6,15 +6,18 @@
         @addDialogueAt="addDialogueAt"
         @deleteDialogue="deleteDialogue"
         :dialogues="lines"/>
+        <dialogueOptions/>
     </div>
 </template>
 
 <script>
 import dialogueView from '../components/dialogueView.vue'
+import dialogueOptions from '../components/dialogueOptions.vue'
 export default {
     name : 'sceneEditor',
     components: {
-        dialogueView
+        dialogueView,
+        dialogueOptions
     },
     data() {
         return {
@@ -92,9 +95,15 @@ export default {
 <style scoped>
 .sceneEditor {
     position: absolute;
+    top:5%;
+    left:0%;
     width: 100%;
     height: 90%;
     padding: 1%;
     background: #ffffff;
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
+    align-items: flex-start;
 }
 </style>
