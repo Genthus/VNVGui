@@ -15,9 +15,9 @@ export default {
 <style scoped>
 .bar {
     width: 100%;
-    padding:auto;
+    padding: 0.5% 0%;
     flex: none;
-    background: #d3993d;
+    background: #f0f0f0;
     border-radius: 11px;
     justify-content: left;
 }

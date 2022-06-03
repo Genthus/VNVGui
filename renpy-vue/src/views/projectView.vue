@@ -47,4 +47,16 @@ export default {
     left:0%;
     background: #121212;
 }
+
+.scenes {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    width: 10%;
+    padding: 1% 0%;
+}
 </style>
