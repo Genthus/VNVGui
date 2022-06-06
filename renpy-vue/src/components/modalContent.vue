@@ -24,7 +24,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import dropZone from './dropZone.vue'
 import useFileList from '../compositions/file-list'
 import filePreview from './filePreview.vue'
@@ -33,27 +33,13 @@ import createUploader from '../compositions/file-uploader'
 const {files,addFiles,removeFile} = useFileList()
 const {uploadFiles} = createUploader('http://localhost:5000/uploadResource')
 
-export default {
-    name: "modalContent",
-    components: {
-        dropZone,
-        filePreview
-    },
-    emits: ['close'],
-    data() {
-        return {
-            files,
-            addFiles,
-            removeFile,
-            uploadFiles
-        }
-    },
-    methods: {
-        onInputChange(e) {
-            addFiles(e.target.files)
-            e.target.value= null
-        }
-    },
+defineEmits([
+    'close'
+])
+
+function onInputChange(e) {
+    addFiles(e.target.files)
+    e.target.value= null
 }
 </script>
 

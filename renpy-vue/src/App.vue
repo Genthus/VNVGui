@@ -13,14 +13,8 @@
 </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      project: {}
-    }
-  }
-}
+<script setup>
+//const project = {}
 </script>
 
 <style>

@@ -6,36 +6,34 @@
 </div>
 </template>
 
-<script>
-export default {
-    name: 'projectView',
-    data() {
-        return {
-            scenes: []
-        }
-    },
-    methods: {
-        changeScene(sceneId) {
-            console.log("switching to scene " + sceneId)
-            this.$router.push('/sceneEditor/'+sceneId)
-        },
-        loadProject() {
-            fetch("http://localhost:5000/testProject").then(response => {
-                if (!response.ok) {
-                    throw new Error("Request failed")
-                }
-                return response.json()
-            })
-            .then(data => {
-                this.scenes = data.scenes
-            })
-            .catch(error => console.log(error))
-        }
-    },
-    mounted() {
-        this.loadProject()
-    }
+<script setup>
+import {ref,onMounted} from 'vue'
+import {useRouter} from 'vue-router'
+
+const router = useRouter()
+
+const scenes = ref(0)
+
+function changeScene(sceneId) {
+    router.push('/sceneEditor/'+sceneId)
 }
+
+function loadProject() {
+    fetch("http://localhost:5000/testProject").then(response => {
+        if (!response.ok) {
+            throw new Error("Request failed")
+        }
+        return response.json()
+    })
+    .then(data => {
+        scenes.value = data.scenes
+    })
+    .catch(error => console.log(error))
+}
+
+onMounted(() => {
+    loadProject()
+})
 </script>
 
 <style scoped>

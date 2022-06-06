@@ -9,21 +9,11 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 import modalContent from './modalContent.vue'
 
-export default {
-    name: "notificationHandler",
-    components: {
-        modalContent
-    },
-    data() {
-        return {
-            isOpen : ref(false)
-        }
-    }
-}
+const isOpen = ref(false)
 </script>
 
 <style scoped>

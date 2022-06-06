@@ -6,15 +6,8 @@
    </div> 
 </template>
 
-<script>
+<script setup>
 import notificationHandler from './notificationHandler.vue'
-
-export default {
-    name: "dialogueOptions",
-    components: {
-        notificationHandler
-    }
-}
 </script>
 
 <style scoped>

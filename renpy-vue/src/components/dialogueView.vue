@@ -16,40 +16,39 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import dialogueBox from './dialogueBox.vue'
 import highlightTools from './highlightTools.vue'
+import {ref} from 'vue'
 
-export default {
-    name: 'dialogueView',
-    components: {
-        dialogueBox,
-        highlightTools
-    },
-    props: {
-        dialogues: Array
-    },
-    data () {
-        return {
-            currentHightlight: 0
+const props = defineProps({
+    dialogues: Array
+})
+const emit = defineEmits([
+    'updateDialogue',
+    'save',
+    'updateDialogue',
+    'addDialogue',
+    'addDialogueAt',
+    'deleteDialogue'
+])
+
+const currentHightlight = ref(0)
+
+function updateDialogue(dialg) {
+    emit('updateDialogue',dialg)
+}
+
+function selectComponent(id) {
+    props.dialogues.forEach(d => {
+        if (d.id == id) {
+            d.highlight = true;
+            currentHightlight.value = d.id;
         }
-    },
-    methods: {
-        updateDialogue(dialg) {
-            this.$emit('updateDialogue',dialg)
-        },
-        selectComponent(id) {
-            this.dialogues.forEach(d => {
-                if (d.id == id) {
-                    d.highlight = true;
-                    this.currentHightlight = d.id;
-                }
-                else {
-                    d.highlight = false;
-                }
-            });
+        else {
+            d.highlight = false;
         }
-    }
+    });
 }
 </script>
 

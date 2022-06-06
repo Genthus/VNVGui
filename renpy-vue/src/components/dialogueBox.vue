@@ -26,25 +26,24 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'dialogueBox',
-    props: {
-        dialogue: Object,
-    },
-    data() {
-        return {
-            newDialogue : this.dialogue,
-        }
-    },
-    methods: {
-        updateDialogue() {
-            this.$emit('updateDialogue',this.newDialogue)
-        },
-        setType(t) {
-            this.newDialogue.type = t;
-        }
-    },
+<script setup>
+import {ref} from 'vue'
+
+const props = defineProps({
+    dialogue: Object
+})
+const emit = defineEmits([
+    'updateDialogue'
+])
+
+const newDialogue = ref(props.dialogue)
+
+function updateDialogue() {
+    emit('updateDialogue', newDialogue.value)
+}
+
+function setType(t) {
+    newDialogue.value.type = t;
 }
 </script>
 
