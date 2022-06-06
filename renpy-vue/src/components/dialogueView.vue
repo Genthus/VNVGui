@@ -3,7 +3,7 @@
         <div class="dialogueBoxes" :key="dialogue.uniqueId" v-for="dialogue in dialogues">
             <highlightTools 
             v-if="dialogue.highlight == true" 
-            @addDialogueAt="$emit('addDialogueAt',dialogue.id)"/>
+            @addDialogueAt="$emit('addDialogueAt',dialogue.id)" @save="$emit('save')"/>
             <dialogueBox 
             @updateDialogue="updateDialogue" 
             @deleteDialogue="$emit('deleteDialogue', dialogue.id)"
@@ -11,7 +11,7 @@
             :dialogue="dialogue"/>
             <highlightTools 
             v-if="dialogue.highlight == true" 
-            @addDialogueAt="$emit('addDialogueAt',dialogue.id+1)"/>
+            @addDialogueAt="$emit('addDialogueAt',dialogue.id+1)" @save="$emit('save')"/>
         </div>
     </div>
 </template>

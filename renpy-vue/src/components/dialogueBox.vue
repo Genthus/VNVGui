@@ -33,7 +33,8 @@ const props = defineProps({
     dialogue: Object
 })
 const emit = defineEmits([
-    'updateDialogue'
+    'updateDialogue',
+    'deleteDialogue'
 ])
 
 const newDialogue = ref(props.dialogue)

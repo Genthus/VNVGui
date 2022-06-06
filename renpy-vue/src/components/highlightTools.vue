@@ -2,6 +2,7 @@
     <div class="bar">
         <div class="buttons">
             <button @click="$emit('addDialogueAt')">New Line</button>
+            <button @click="$emit('save')">Save</button>
         </div>
     </div>
 </template>

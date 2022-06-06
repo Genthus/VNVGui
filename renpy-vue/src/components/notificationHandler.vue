@@ -3,7 +3,7 @@
         <button @click="isOpen = true">Open Resources</button>
         <teleport to="body">
             <div class="modal" v-if="isOpen">
-                <modalContent @close="isOpen = false"/>
+                <resourceLoader @close="isOpen = false"/>
             </div>
         </teleport>
     </div>
@@ -11,7 +11,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import modalContent from './modalContent.vue'
+import resourceLoader from './resourceLoader.vue'
 
 const isOpen = ref(false)
 </script>
