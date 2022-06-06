@@ -3,9 +3,7 @@
         <button @click="isOpen = true">Open Resources</button>
         <teleport to="body">
             <div class="modal" v-if="isOpen">
-                <modalContent
-                    @close="isOpen = false"
-                />
+                <modalContent @close="isOpen = false"/>
             </div>
         </teleport>
     </div>
@@ -14,6 +12,7 @@
 <script>
 import { ref } from 'vue'
 import modalContent from './modalContent.vue'
+
 export default {
     name: "notificationHandler",
     components: {
@@ -21,7 +20,7 @@ export default {
     },
     data() {
         return {
-            isOpen : ref(false),
+            isOpen : ref(false)
         }
     }
 }
