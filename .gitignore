@@ -8,3 +8,5 @@ testing.py
 __pycache__
 # venv variables
 server/venv/pyvenv.cfg
+# resourceFiles
+server/static/files/*
