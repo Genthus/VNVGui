@@ -1,7 +1,6 @@
 <template>
     <div class="notif">
-        <dropZone class="drop-area"
-            @files-dropped="addFiles" #default="{ dropZoneActive }">
+        <dropZone class="drop-area" @files-dropped="addFiles" #default="{ dropZoneActive }">
                 <label for="file-input">
                     <span v-if="dropZoneActive">
                         <span>Drop Them Here</span>
@@ -40,6 +39,7 @@ export default {
         dropZone,
         filePreview
     },
+    emits: ['close'],
     data() {
         return {
             files,
