@@ -4,7 +4,7 @@
                 <label for="file-input">
                     <span v-if="dropZoneActive">
                         <span>Drop Them Here</span>
-                        <span class="smaller">to add them</span>
+                        <span class="smaller"> to add them</span>
                     </span>
                     <span v-else>
                         <span>Drag Your Files Here</span>
@@ -30,8 +30,8 @@ import useFileList from '../compositions/file-list'
 import filePreview from './filePreview.vue'
 import createUploader from '../compositions/file-uploader'
 
-const {files,addFiles,removeFiles} = useFileList()
-const {uploadFiles} = createUploader('http://localhost:5000')
+const {files,addFiles,removeFile} = useFileList()
+const {uploadFiles} = createUploader('http://localhost:5000/uploadResource')
 
 export default {
     name: "modalContent",
@@ -44,7 +44,7 @@ export default {
         return {
             files,
             addFiles,
-            removeFiles,
+            removeFile,
             uploadFiles
         }
     },

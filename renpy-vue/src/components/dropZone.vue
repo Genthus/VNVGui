@@ -16,17 +16,18 @@ export default {
     data() {
         return {
             active: ref(false),
-            inactiveTimeout: null
+            inactiveTimeout: null,
+            events: ['dragenter','dragover','dragleave','drop']
         }
     },
     methods: {
         setActive() {
-            this.active.value = true
+            this.active = true
             clearTimeout(this.inactiveTimeout)
         },
         setInactive() {
             this.inactiveTimeout = setTimeout(() => {
-                this.active.value = false
+                this.active = false
             }, 50);
         },
         onDrop(e) {
@@ -36,7 +37,6 @@ export default {
             e.preventDefault()
         }
     },
-    events: ['dragenter','dragover','dragleave','drop'],
     mounted() {
         this.events.forEach((eventName) => {
             document.body.addEventListener(eventName,this.preventDefaults)
