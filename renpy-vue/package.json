@@ -2,14 +2,18 @@
   "name": "renpy-vue",
   "version": "0.1.0",
   "private": true,
-  "main": "main.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "vue-cli-service build && electron .",
-    "dev": "vue-cli-service serve && electron ."
+    "dev": "vue-cli-service serve && electron .",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps",
+    "start": "vue-cli-service build && electron ."
   },
+  "main": "background.js",
   "dependencies": {
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
@@ -23,8 +27,10 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "electron": "^18.2.3",
+    "electron-devtools-installer": "^3.1.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "vue-cli-plugin-electron-builder": "~2.1.1",
     "vue-eslint-parser": "^9.0.2"
   },
   "eslintConfig": {
