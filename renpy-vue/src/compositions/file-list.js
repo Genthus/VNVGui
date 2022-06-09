@@ -20,7 +20,17 @@ export default function () {
         if (index > -1) files.value.splice(index, 1)
     }
 
-    return { files, addFiles, removeFile }
+    function editFileName(file, name) {
+        const index = files.value.indexOf(file)
+        if (index > -1) files.value[index].name = name
+    }
+
+    function editFileType(file, type) {
+        const index = files.value.indexOf(file)
+        if (index > -1) files.value[index].type = type
+    }
+
+    return { files, addFiles, removeFile, editFileName, editFileType}
 }
 
 class UploadableFile {
@@ -29,5 +39,7 @@ class UploadableFile {
         this.id = `${file.name}-${file.size}-${file.lastModified}-${file.type}`
         this.url = URL.createObjectURL(file)
         this.status = null
+        this.name = file.name
+        this.type = "character"
     }
 }

@@ -65,6 +65,7 @@ function selectComponent(id) {
     align-items: flex-start;
     gap: 1%;
     padding:1%;
+    border-radius: 11px;
 }
 .dialogueBoxes {
     width: 100%;

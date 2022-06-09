@@ -2,6 +2,8 @@ export async function uploadFile(file, url) {
     // set up the request data
     let formData = new FormData()
     formData.append('file', file.file)
+    formData.append('type', file.type)
+    formData.append('name', file.name)
 
     // track status and upload file
     file.status = 'loading'

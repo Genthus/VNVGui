@@ -10,8 +10,8 @@ def getProjectJson(proJname):
     with open(projectsFolder+proJname+"/project.json", 'r') as f:
         return json.load(f)
 
-def overWriteScene(proJname, scene):
-    with open(projectsFolder+proJname+"/project.json", 'r+') as f:
+def overWriteScene(projName, scene):
+    with open(projectsFolder+projName+"/project.json", 'r+') as f:
         data = json.load(f)
         if (data["scenes"][scene["id"]]):
             data["scenes"][scene["id"]] = scene
@@ -22,6 +22,23 @@ def overWriteScene(proJname, scene):
         else:
             print("Scene " + scene.name + " not found, overwrite failed")
             return False
+
+def saveFile(projName, name, type, fileName):
+    with open(projectsFolder+projName+"/project.json", 'r+') as f:
+        data = json.load(f)
+        if 'resources' not in data:
+            data["resources"] = {}
+        if type not in data["resources"]:
+            data["resources"][type] = {}
+
+        if name in data["resources"][type]:
+            print("data exists")
+        else:
+            data["resources"][type][name] = {'name': name,'type': type,'fileName': fileName}
+        f.seek(0)
+        f.truncate()
+        json.dump(data, f)
+        return True
 
 class Project:
     name = ""

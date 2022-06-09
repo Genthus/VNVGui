@@ -48,7 +48,8 @@ onUnmounted(()=> {
 
 <style scoped>
 .dropZone {
-    width:20%;
-    height:10%;
+    width:100%;
+    height:100%;
+    border-radius: 11px;
 }
 </style>

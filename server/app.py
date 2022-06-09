@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_wtf import FlaskForm
 from wtforms import FileField, SubmitField
 from werkzeug.utils import secure_filename
+import pathlib
 import os
 import rpyParser
 
@@ -15,6 +16,8 @@ projectName = 'test'
 
 class UploadFileForm(FlaskForm):
     file = FileField("File")
+    type = FileField("type")
+    name = FileField("name")
     submit = SubmitField("Upload File")
 
 @app.route("/testDialogues")
@@ -34,9 +37,12 @@ def uploadResource():
     form = UploadFileForm()
     if form:
         file = form.file.data
+        fileCopy = form.file.data
+        hashedFileName = str(hash(projectName + form.name.data + form.type.data)) + pathlib.Path(file.filename).suffix
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__))
                                 ,app.config['UPLOAD_FOLDER']
-                                ,secure_filename(file.filename)))
+                                ,secure_filename(hashedFileName)))
+        rpyParser.saveFile(projectName, form.name.data, form.type.data, hashedFileName)
         return jsonify(isError = False,
                         message = "File Uploaded",
                         statusCode = 200,
