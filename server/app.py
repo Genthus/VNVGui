@@ -20,6 +20,12 @@ class UploadFileForm(FlaskForm):
     name = FileField("name")
     submit = SubmitField("Upload File")
 
+@app.route("/projects")
+def listProjects():
+    rpyParser.discoverProjects()
+    data = rpyParser.getProjects()
+    return jsonify(data)
+
 @app.route("/testDialogues")
 def testDialogues():
     proj = rpyParser.getProjectJson(projectName)
@@ -42,7 +48,7 @@ def uploadResource():
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__))
                                 ,app.config['UPLOAD_FOLDER']
                                 ,secure_filename(hashedFileName)))
-        rpyParser.saveFile(projectName, form.name.data, form.type.data, hashedFileName)
+        rpyParser.saveResourceFile(projectName, form.name.data, form.type.data, hashedFileName)
         return jsonify(isError = False,
                         message = "File Uploaded",
                         statusCode = 200,
@@ -58,6 +64,7 @@ def saveScene():
     if request.method == 'POST':
         scene = request.get_json(force=True)
         if (rpyParser.overWriteScene(projectName,scene)):
+            rpyParser.setJumps(projectName)
             return jsonify(isError = False,
                             message = "Success",
                             statusCode = 200,
