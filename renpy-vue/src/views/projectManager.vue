@@ -14,8 +14,8 @@ const router = useRouter()
 
 const projects = ref([])
 
-function setProject(projectId) {
-    router.push('/project/'+projectId)
+function setProject(id) {
+    router.push({name: 'projectView', params: {projectId: id}})
 }
 
 function getProjects() {
@@ -41,7 +41,7 @@ onMounted(() => {
     position: absolute;
     width: 100%;
     height: 95%;
-    top:5%;
+    top:60px;
     left:0%;
     background: #121212;
 }

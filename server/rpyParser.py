@@ -10,6 +10,19 @@ def getProjectJson(proJname):
     with open(os.path.join(projectsFolder,proJname,"project.json"), 'r') as f:
         return json.load(f)
 
+def getProjectJsonById(id):
+    projects = getProjects()
+    projectPath = ''
+    project = projects['projects'][int(id)]
+    if project:
+        projectPath = project['path']
+    if projectPath != '':
+        with open(os.path.join(projectPath,'project.json'), 'r') as f:
+            return json.load(f)
+    print('Error loading project with id:' + id + ' at path: ' + projectPath)
+    return False
+
+
 def overWriteScene(projName, scene):
     with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
         data = json.load(f)
@@ -22,6 +35,24 @@ def overWriteScene(projName, scene):
         else:
             print("Scene " + scene.name + " not found, overwrite failed")
             return False
+
+def overWriteSceneById(projId, sceneId, scene):
+    projects = getProjects()
+    projectPath = ''
+    project = projects['projects'][projId]
+    if project:
+        projectPath = project['path']
+    if projectPath != '':
+        with open(os.path.join(projectPath,'project.json'), 'r+') as f:
+            data = json.load(f)
+            if (data["scenes"][scene["id"]]):
+                data["scenes"][scene["id"]] = scene
+                f.seek(0)
+                f.truncate()
+                json.dump(data, f)
+                return True
+            else:
+                return False
 
 def saveResourceFile(projName, name, type, fileName):
     with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
@@ -54,7 +85,6 @@ def setJumps(projName):
                     if line['type'] == 'jump':
                         jumps.append({'source': scene['name'], 'location': line['id'], 'destination': line['text']})
 
-        print(jumps)
         if 'jumps' not in data:
             data['jumps'] = []
         data['jumps'] = jumps

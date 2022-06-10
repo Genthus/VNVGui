@@ -1,5 +1,6 @@
 <template>
 <div class="projectView">
+    <h1>{{name}}</h1>
     <ul class="scenes" :key="scene.id" v-for="scene in scenes">
       <button @click="changeScene(scene.id)">{{scene.name}}</button>
     </ul>
@@ -8,18 +9,24 @@
 
 <script setup>
 import {ref,onMounted} from 'vue'
-import {useRouter} from 'vue-router'
+import {useRouter, useRoute} from 'vue-router'
 
 const router = useRouter()
+const route = useRoute()
+
+const emit = defineEmits([
+    'projectLoaded'
+])
 
 const scenes = ref(0)
+const name = ref('')
 
-function changeScene(sceneId) {
-    router.push('/sceneEditor/'+sceneId)
+function changeScene(id) {
+    router.push({name: 'sceneEditor', params: {projectId: route.params.projectId, sceneId: id}})
 }
 
-function loadProject() {
-    fetch("http://localhost:5000/testProject").then(response => {
+function loadProject(projectId) {
+    fetch("http://localhost:5000/project?id=" + projectId).then(response => {
         if (!response.ok) {
             throw new Error("Request failed")
         }
@@ -27,12 +34,14 @@ function loadProject() {
     })
     .then(data => {
         scenes.value = data.scenes
+        name.value = data.projectName
+        emit('projectLoaded')
     })
     .catch(error => console.log(error))
 }
 
 onMounted(() => {
-    loadProject()
+    loadProject(route.params.projectId)
 })
 </script>
 
@@ -41,11 +50,14 @@ onMounted(() => {
     position: absolute;
     width: 100%;
     height: 95%;
-    top:5%;
+    top:60px;
     left:0%;
     background: #121212;
 }
 
+h1 {
+    color: aliceblue;
+}
 .scenes {
     position: relative;
     display: flex;

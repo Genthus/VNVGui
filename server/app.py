@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 from flask_wtf import FlaskForm
@@ -25,6 +26,27 @@ def listProjects():
     rpyParser.discoverProjects()
     data = rpyParser.getProjects()
     return jsonify(data)
+
+@app.route("/project")
+def getProject():
+    projectId = request.args.get('id')
+    projectData = rpyParser.getProjectJsonById(projectId)
+    return jsonify(projectData)
+
+@app.route('/getScene')
+def getScene():
+    projectId = request.args.get('projectId')
+    sceneId = request.args.get('sceneId')
+    projectData = rpyParser.getProjectJsonById(projectId)
+    print('project: ' +projectId)
+    print('scene: ' +sceneId)
+    data = projectData['scenes'][int(sceneId)]
+    if data:
+        return jsonify(data)
+    return jsonify(isError = True,
+                    message = "Error getting scene",
+                    statusCode = 100,
+                    data = {}), 100
 
 @app.route("/testDialogues")
 def testDialogues():
@@ -62,8 +84,10 @@ def uploadResource():
 @app.route("/saveScene", methods = ['POST'])
 def saveScene():
     if request.method == 'POST':
+        projectId = request.args.get('projectId')
+        sceneId = request.args.get('sceneId')
         scene = request.get_json(force=True)
-        if (rpyParser.overWriteScene(projectName,scene)):
+        if (rpyParser.overWriteSceneById(int(projectId),int(sceneId),scene)):
             rpyParser.setJumps(projectName)
             return jsonify(isError = False,
                             message = "Success",

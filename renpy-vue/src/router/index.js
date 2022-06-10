@@ -5,19 +5,19 @@ import projectManager from '../views/projectManager.vue'
 
 const routes = [
   {
-    path: '/sceneEditor/:id',
-    name: 'sceneEditor',
-    component: sceneEditor
-  },
-  {
     path: '/projects',
     name: 'projectManager',
     component: projectManager
   },
   {
-    path: '/project/:id',
+    path: '/project/:projectId',
     name: 'projectView',
-    component: projectView
+    component: projectView,
+  },
+  {
+    path: '/project/:projectId/sceneEditor/:sceneId',
+    name: 'sceneEditor',
+    component: sceneEditor
   }
 ]
 
