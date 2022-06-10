@@ -3,7 +3,9 @@ import os
 import shutil
 import json
 
+# Main folder where project directories and projects.json is stored
 projectsFolder = "../projects"
+# Directory for base project
 baseProjectFolder = "./defs/base"
 
 # Searches for a project with proJname in the projects folder, returns project.json
