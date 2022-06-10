@@ -37,12 +37,9 @@ def getProject():
 def getScene():
     projectId = request.args.get('projectId')
     sceneId = request.args.get('sceneId')
-    projectData = rpyParser.getProjectJsonById(projectId)
-    print('project: ' +projectId)
-    print('scene: ' +sceneId)
-    data = projectData['scenes'][int(sceneId)]
-    if data:
-        return jsonify(data)
+    scene = rpyParser.getSceneById(projectId, sceneId)
+    if scene:
+        return jsonify(scene)
     return jsonify(isError = True,
                     message = "Error getting scene",
                     statusCode = 100,
@@ -94,9 +91,9 @@ def saveScene():
                             statusCode = 200,
                             data = {}), 200
         else:
-            return jsonify(isError = False,
-                            message = "Failed",
-                            statusCode = 200,
+            return jsonify(isError = True,
+                            message = "Failed to save scene",
+                            statusCode = 100,
                             data = {}), 200
 
 if __name__ == '__main__':

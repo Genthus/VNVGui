@@ -2,14 +2,17 @@
 import os
 import shutil
 import json
+from tkinter import W
 
 projectsFolder = "../projects"
 baseProjectFolder = "./defs/base"
 
+# Searches for a project with proJname in the projects folder, returns project.json
 def getProjectJson(proJname):
     with open(os.path.join(projectsFolder,proJname,"project.json"), 'r') as f:
         return json.load(f)
 
+# Searches through projects.json and returns the project.json
 def getProjectJsonById(id):
     projects = getProjects()
     projectPath = ''
@@ -22,20 +25,7 @@ def getProjectJsonById(id):
     print('Error loading project with id:' + id + ' at path: ' + projectPath)
     return False
 
-
-def overWriteScene(projName, scene):
-    with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
-        data = json.load(f)
-        if (data["scenes"][scene["id"]]):
-            data["scenes"][scene["id"]] = scene
-            f.seek(0)
-            f.truncate()
-            json.dump(data, f)
-            return True
-        else:
-            print("Scene " + scene.name + " not found, overwrite failed")
-            return False
-
+# Overwrites scene object by its index
 def overWriteSceneById(projId, sceneId, scene):
     projects = getProjects()
     projectPath = ''
@@ -54,6 +44,7 @@ def overWriteSceneById(projId, sceneId, scene):
             else:
                 return False
 
+# Takes data of new resource file and adds it to project.json
 def saveResourceFile(projName, name, type, fileName):
     with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
         data = json.load(f)
@@ -94,6 +85,49 @@ def setJumps(projName):
         json.dump(data, f)
         return True
 
+# Searches through the project folder and registers found projects into projects.json
+def discoverProjects():
+    projects = []
+    projectId = 0
+
+    for root, subdirectories, files in os.walk(projectsFolder):
+        if 'project.json' in os.listdir(root):
+            with open(os.path.join(root, 'project.json'), "r") as f: 
+                data = json.load(f)
+                if 'projectName' in data:
+                    projects.append({'name': data['projectName'], 'path': root, 'id': projectId})
+                    projectId+=1
+                            
+    with open(os.path.join(projectsFolder, 'projects.json'), "r+") as f: 
+        data = json.load(f)
+        if 'projects' not in data:
+            data['projects'] = []
+        data['projects'] = projects
+        f.seek(0)
+        f.truncate()
+        json.dump(data, f)
+    
+
+# Returns projects.json contents
+def getProjects():
+    with open(os.path.join(projectsFolder, 'projects.json'), "r") as f: 
+        return json.load(f)
+
+# Fetches scene object by projectId and sceneId
+def getSceneById(projectId, sceneId):
+    projectData = getProjectJsonById(projectId)
+    print('project: ' +projectId)
+    print('scene: ' +sceneId)
+    data = projectData['scenes'][int(sceneId)]
+    if data:
+        return data
+    return False
+
+##
+##
+## Anything beyond this point needs to be changed
+##
+##
 
 class Project:
     name = ""
@@ -149,31 +183,6 @@ def openProject(name):
     if os.exists(os.path.join(projectsFolder,name)):
         return Project(name)
 
-def discoverProjects():
-    projects = []
-    projectId = 0
-
-    for root, subdirectories, files in os.walk(projectsFolder):
-        if 'project.json' in os.listdir(root):
-            with open(os.path.join(root, 'project.json'), "r") as f: 
-                data = json.load(f)
-                if 'projectName' in data:
-                    projects.append({'name': data['projectName'], 'path': root, 'id': projectId})
-                    projectId+=1
-                            
-    with open(os.path.join(projectsFolder, 'projects.json'), "r+") as f: 
-        data = json.load(f)
-        if 'projects' not in data:
-            data['projects'] = []
-        data['projects'] = projects
-        f.seek(0)
-        f.truncate()
-        json.dump(data, f)
-    
-
-def getProjects():
-    with open(os.path.join(projectsFolder, 'projects.json'), "r") as f: 
-        return json.load(f)
 
 
 class RpyScene:
