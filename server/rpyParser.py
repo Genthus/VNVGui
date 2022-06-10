@@ -2,7 +2,6 @@
 import os
 import shutil
 import json
-from tkinter import W
 
 projectsFolder = "../projects"
 baseProjectFolder = "./defs/base"
