@@ -7,6 +7,7 @@
       </div>
     <div class="links">
       <router-link to="/">Project View</router-link>
+      <router-link to="/projects" class="projectManager">Project Manager</router-link>
     </div>
   </nav>
   <router-view/>
@@ -44,13 +45,16 @@ nav {
   background: #5647ae;
   display: flex;
   justify-content: left;
-  align-content: center;
-  padding: 0 5%;
+  align-items: center;
+  padding: 0 3%;
+  gap: 2%;
 }
 
 .links {
-  padding: 1%;
-  margin: 0 5%;
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  gap: 4%;
 }
 
 nav a {

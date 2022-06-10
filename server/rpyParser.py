@@ -3,15 +3,15 @@ import os
 import shutil
 import json
 
-projectsFolder = "../projects/"
-baseProjectFolder = "./defs/base/"
+projectsFolder = "../projects"
+baseProjectFolder = "./defs/base"
 
 def getProjectJson(proJname):
-    with open(projectsFolder+proJname+"/project.json", 'r') as f:
+    with open(os.path.join(projectsFolder,proJname,"project.json"), 'r') as f:
         return json.load(f)
 
 def overWriteScene(projName, scene):
-    with open(projectsFolder+projName+"/project.json", 'r+') as f:
+    with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
         data = json.load(f)
         if (data["scenes"][scene["id"]]):
             data["scenes"][scene["id"]] = scene
@@ -24,7 +24,7 @@ def overWriteScene(projName, scene):
             return False
 
 def saveResourceFile(projName, name, type, fileName):
-    with open(projectsFolder+projName+"/project.json", 'r+') as f:
+    with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
         data = json.load(f)
         if 'resources' not in data:
             data["resources"] = {}
@@ -42,7 +42,7 @@ def saveResourceFile(projName, name, type, fileName):
 
 # Finds jump instructions inside scenes and adds them to a key in the root of project.json
 def setJumps(projName):
-    with open(projectsFolder+projName+"/project.json", 'r+') as f:
+    with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
         data = json.load(f)
 
         jumps = []
@@ -73,7 +73,7 @@ class Project:
 
     def __init__(self, name):
         self.name = name
-        self.baseDirectory = projectsFolder + name + "/"
+        self.baseDirectory = os.path.join(projectsFolder, name)
     
     def setDirectory(self, directory):
         self.baseDirectory = directory
@@ -83,7 +83,7 @@ class Project:
         for scene in self.projectScenes:
             output += scene.writeScene()
         try:
-            with open(self.baseDirectory +"game/script.rpy", 'w') as f:
+            with open(os.path.join(self.baseDirectory, "game/script.rpy"), 'w') as f:
                 f.write(output)
                 print("Wrote script to: "+ self.baseDirectory + "script.rpy")
         except FileNotFoundError:
@@ -91,9 +91,9 @@ class Project:
     
     def parseProjectJSON(self):
         # Load json file
-        projFileExists = os.exists(self.baseDirectory + "project.json")
+        projFileExists = os.exists(os.path.join(self.baseDirectory, "project.json"))
         if projFileExists:
-            with open(self.baseDirectory+"project.json", "r") as f: 
+            with open(os.path.join(self.baseDirectory,"project.json"), "r") as f: 
                 self.ProjectObject = json.load(f)
                 print("Project JSON file loaded")
         else:
@@ -107,31 +107,31 @@ class Project:
         
 
 def createProject(name):
-    if not os.exists(projectsFolder+name):
-        shutil.copytree(baseProjectFolder,projectsFolder+name)
+    if not os.exists(os.path.join(projectsFolder,name)):
+        shutil.copytree(baseProjectFolder,os.path.join(projectsFolder,name))
         newProj = Project(name)
-        newProj.setDirectory(projectsFolder+name+'/')
+        newProj.setDirectory(os.path.join(projectsFolder,name))
         return newProj
     else:
         print("Project with that name already exists")
 
 def openProject(name):
-    if os.exists(projectsFolder+name):
+    if os.exists(os.path.join(projectsFolder,name)):
         return Project(name)
 
 def discoverProjects():
     projects = []
+    projectId = 0
 
     for root, subdirectories, files in os.walk(projectsFolder):
-        for subdirectory in subdirectories:
-            if os.isdir(subdirectory):
-                if 'project.json' in subdirectory.os.listdir():
-                    with open(subdirectory + '/project.json', "r") as f: 
-                        data = json.load(f)
-                        if 'projectName' in data:
-                            projects.append({'name': data['projectName'], 'path': subdirectory})
+        if 'project.json' in os.listdir(root):
+            with open(os.path.join(root, 'project.json'), "r") as f: 
+                data = json.load(f)
+                if 'projectName' in data:
+                    projects.append({'name': data['projectName'], 'path': root, 'id': projectId})
+                    projectId+=1
                             
-    with open(projectsFolder + '/projects.json', "r") as f: 
+    with open(os.path.join(projectsFolder, 'projects.json'), "r+") as f: 
         data = json.load(f)
         if 'projects' not in data:
             data['projects'] = []
@@ -142,7 +142,7 @@ def discoverProjects():
     
 
 def getProjects():
-    with open(projectsFolder + '/projects.json', "r") as f: 
+    with open(os.path.join(projectsFolder, 'projects.json'), "r") as f: 
         return json.load(f)
 
 
