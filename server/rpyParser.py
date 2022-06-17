@@ -26,15 +26,6 @@ def getProjectJsonById(id):
     print('Error loading project with id:' + id + ' at path: ' + projectPath)
     return False
 
-<<<<<<< Updated upstream
-def saveFile(projName, name, type, fileName):
-    with open(projectsFolder+projName+"/project.json", 'r+') as f:
-=======
-# Takes data of new resource file and adds it to project.json
-def saveResourceFile(projName, name, type, fileName, fileDir):
-    with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
->>>>>>> Stashed changes
-=======
 # Overwrites scene object by its index
 def overWriteSceneById(projId, sceneId, scene):
     projects = getProjects()
@@ -55,9 +46,8 @@ def overWriteSceneById(projId, sceneId, scene):
                 return False
 
 # Takes data of new resource file and adds it to project.json
-def saveResourceFile(projName, name, type, fileName):
+def saveResourceFile(projName, name, type, fileName, fileDir):
     with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
->>>>>>> projectViewer
         data = json.load(f)
         if 'resources' not in data:
             data["resources"] = {}
@@ -73,10 +63,6 @@ def saveResourceFile(projName, name, type, fileName):
         json.dump(data, f)
         return True
 
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> projectViewer
 # Finds jump instructions inside scenes and adds them to a key in the root of project.json
 def setJumps(projName):
     with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
@@ -136,7 +122,6 @@ def getSceneById(projectId, sceneId):
         return data
     return False
 
-<<<<<<< HEAD
 def getResourceListById(projectId):
     projectData = getProjectJsonById(projectId)
     if 'resources' not in projectData.keys():
@@ -153,7 +138,6 @@ def getResourceListById(projectId):
 ##
 ##
 
->>>>>>> Stashed changes
 class Project:
     name = ""
     baseDirectory = ""

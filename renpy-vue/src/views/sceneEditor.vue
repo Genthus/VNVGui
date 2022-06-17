@@ -103,15 +103,8 @@ function deleteDialogue(i) {
 }
 
 onMounted (()=> {
-<<<<<<< Updated upstream
-    loadDialogues(route.params.id)
-=======
     loadDialogues(route.params.sceneId)
     loadResources()
->>>>>>> Stashed changes
-=======
-    loadDialogues(route.params.sceneId)
->>>>>>> projectViewer
 })
 
 </script>
