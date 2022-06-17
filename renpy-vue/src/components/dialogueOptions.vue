@@ -1,13 +1,26 @@
 <template>
    <div class="dialogueOptionsBox">
-       <div class="optionBox">
-           <notificationHandler/>
-       </div>
+       <ResourceWrapper :tabTitles="resources">
+           <ResourceBox v-for="title in resources" :key="title+'Tab'" 
+           :title="title"
+           :fileNames="resourcesObject[title]"/>
+       </ResourceWrapper>
+        <div class="optionBox">
+            <notificationHandler
+            @reloadResources="$emit('reloadResources')"/>
+        </div>
    </div> 
 </template>
 
 <script setup>
 import notificationHandler from './notificationHandler.vue'
+import ResourceWrapper from './resourceWrapper.vue'
+import ResourceBox from './resourceBox.vue'
+
+defineProps([
+    'resources',
+    'resourcesObject'
+])
 </script>
 
 <style scoped>
@@ -21,8 +34,8 @@ import notificationHandler from './notificationHandler.vue'
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1%;
     padding:1%;
+    gap:1%;
 }
 .optionBox {
     width: 100%;

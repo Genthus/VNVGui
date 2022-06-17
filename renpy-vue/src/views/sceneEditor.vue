@@ -6,7 +6,10 @@
         @addDialogueAt="addDialogueAt"
         @deleteDialogue="deleteDialogue"
         :dialogues="lines"/>
-        <dialogueOptions/>
+        <dialogueOptions
+        :resources="resourceList"
+        :resourcesObject="resourcesObject"
+        @reloadResources="loadResources"/>
     </div>
 </template>
 
@@ -21,6 +24,8 @@ const id = ref(0)
 const name = ref("")
 const lines = ref([])
 const uniqueId = ref(0)
+const resourceList = ref([])
+const resourcesObject = ref([])
 
 function loadDialogues(sceneId) {
     fetch("http://localhost:5000/testProject").then(response => {
@@ -38,6 +43,20 @@ function loadDialogues(sceneId) {
         lines.value.forEach(l => {
             l.uniqueId = uniqueId.value++;
         });
+    })
+    .catch(error => console.log(error))
+}
+
+function loadResources() {
+    fetch("http://localhost:5000/getResourceList?projectId=" + route.params.projectId).then(response => {
+        if (!response.ok) {
+            throw new Error("Request failed")
+        }
+        return response.json()
+    })
+    .then(data => {
+        resourceList.value = Object.keys(data)
+        resourcesObject.value = data
     })
     .catch(error => console.log(error))
 }
@@ -86,7 +105,12 @@ function deleteDialogue(i) {
 }
 
 onMounted (()=> {
+<<<<<<< Updated upstream
     loadDialogues(route.params.id)
+=======
+    loadDialogues(route.params.sceneId)
+    loadResources()
+>>>>>>> Stashed changes
 })
 
 </script>

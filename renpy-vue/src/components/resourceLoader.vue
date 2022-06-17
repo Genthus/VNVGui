@@ -32,9 +32,11 @@ import dropZone from './dropZone.vue'
 import useFileList from '../compositions/file-list'
 import filePreview from './filePreview.vue'
 import createUploader from '../compositions/file-uploader'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 
 const {files,addFiles,removeFile, editFileName, editFileType} = useFileList()
-const {uploadFiles} = createUploader('http://localhost:5000/uploadResource')
+const {uploadFiles} = createUploader('http://localhost:5000/uploadResource?projectId=' + route.params.projectId)
 
 const emit = defineEmits([
     'close'

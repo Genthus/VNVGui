@@ -3,7 +3,7 @@
         <button @click="isOpen = true">Open Resources</button>
         <teleport to="body">
             <div class="modal" v-if="isOpen">
-                <resourceLoader @close="isOpen = false"/>
+                <resourceLoader @close="isOpen = false; $emit('reloadResources')"/>
             </div>
         </teleport>
     </div>
