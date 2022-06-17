@@ -28,18 +28,16 @@ const resourceList = ref([])
 const resourcesObject = ref([])
 
 function loadDialogues(sceneId) {
-    fetch("http://localhost:5000/testProject").then(response => {
+    fetch("http://localhost:5000/getScene?projectId=" + route.params.projectId + '&sceneId=' + sceneId).then(response => {
         if (!response.ok) {
             throw new Error("Request failed")
         }
         return response.json()
     })
     .then(data => {
-        const scene = data.scenes[sceneId]
-        console.log(scene)
-        id.value = scene.id
-        name.value = scene.name
-        lines.value = scene.lines
+        id.value = data.id
+        name.value = data.name
+        lines.value = data.lines
         lines.value.forEach(l => {
             l.uniqueId = uniqueId.value++;
         });
@@ -62,7 +60,7 @@ function loadResources() {
 }
 
 async function saveScene() {
-    await fetch("http://localhost:5000/saveScene", {
+    await fetch("http://localhost:5000/saveScene?projectId=" + route.params.projectId + '&sceneId='+route.params.sceneId, {
         method: 'POST',
         headers: {
             'Accept' : 'application/json',
@@ -111,6 +109,9 @@ onMounted (()=> {
     loadDialogues(route.params.sceneId)
     loadResources()
 >>>>>>> Stashed changes
+=======
+    loadDialogues(route.params.sceneId)
+>>>>>>> projectViewer
 })
 
 </script>
@@ -118,10 +119,10 @@ onMounted (()=> {
 <style scoped>
 .sceneEditor {
     position: absolute;
-    top:5%;
+    top:60px;
     left:0%;
-    width: 100%;
-    height: 90%;
+    width: 94%;
+    height: 88%;
     padding: 1%;
     background: #121212;
     display: flex;

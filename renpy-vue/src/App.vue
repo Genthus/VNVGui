@@ -6,15 +6,21 @@
       
       </div>
     <div class="links">
-      <router-link to="/">Project View</router-link>
+      <router-link :to="{name: 'projectView', params: {projectId: route.params.projectId}}" class="projectView" v-if="hasProject">Project View</router-link>
     </div>
+    <router-link to="/projects" class="projectManager" @click="hasProject = false">Project Manager</router-link>
   </nav>
-  <router-view/>
+  <router-view @projectLoaded="hasProject = true"/>
 </div>
 </template>
 
 <script setup>
 //const project = {}
+import {ref} from 'vue'
+import {useRoute} from 'vue-router'
+const route = useRoute()
+
+const hasProject = ref(false)
 </script>
 
 <style>
@@ -37,20 +43,28 @@ body {
 
 nav {
   position:absolute;
-  width: 100%;
+  width: 94%;
   height: 50px;
   top: 0;
   left:0;
   background: #5647ae;
   display: flex;
   justify-content: left;
-  align-content: center;
-  padding: 0 5%;
+  align-items: center;
+  padding: 0 3%;
+  gap: 2%;
 }
 
 .links {
-  padding: 1%;
-  margin: 0 5%;
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  gap: 4%;
+   
+}
+
+.projectManager {
+  right: 5%;
 }
 
 nav a {

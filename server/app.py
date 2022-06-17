@@ -25,6 +25,32 @@ class UploadFileForm(FlaskForm):
     submit = SubmitField("Upload File")
 
 <<<<<<< Updated upstream
+=======
+@app.route("/projects")
+def listProjects():
+    rpyParser.discoverProjects()
+    data = rpyParser.getProjects()
+    return jsonify(data)
+
+@app.route("/project")
+def getProject():
+    projectId = request.args.get('id')
+    projectData = rpyParser.getProjectJsonById(projectId)
+    return jsonify(projectData)
+
+@app.route('/getScene')
+def getScene():
+    projectId = request.args.get('projectId')
+    sceneId = request.args.get('sceneId')
+    scene = rpyParser.getSceneById(projectId, sceneId)
+    if scene:
+        return jsonify(scene)
+    return jsonify(isError = True,
+                    message = "Error getting scene",
+                    statusCode = 100,
+                    data = {}), 100
+
+>>>>>>> projectViewer
 @app.route("/testDialogues")
 def testDialogues():
     proj = rpyParser.getProjectJson(projectName)
@@ -102,6 +128,8 @@ def uploadResource():
         file.save(os.path.join(projectDir,secure_filename(hashedFileName)))
         rpyParser.saveResourceFile(projectName, form.name.data, form.type.data, hashedFileName, os.path.join(app.config['UPLOAD_FOLDER'],'project_'+str(projectId),secure_filename(hashedFileName)))
 >>>>>>> Stashed changes
+        rpyParser.saveResourceFile(projectName, form.name.data, form.type.data, hashedFileName)
+>>>>>>> projectViewer
         return jsonify(isError = False,
                         message = "File Uploaded",
                         statusCode = 200,
@@ -115,16 +143,19 @@ def uploadResource():
 @app.route("/saveScene", methods = ['POST'])
 def saveScene():
     if request.method == 'POST':
+        projectId = request.args.get('projectId')
+        sceneId = request.args.get('sceneId')
         scene = request.get_json(force=True)
-        if (rpyParser.overWriteScene(projectName,scene)):
+        if (rpyParser.overWriteSceneById(int(projectId),int(sceneId),scene)):
+            rpyParser.setJumps(projectName)
             return jsonify(isError = False,
                             message = "Success",
                             statusCode = 200,
                             data = {}), 200
         else:
-            return jsonify(isError = False,
-                            message = "Failed",
-                            statusCode = 200,
+            return jsonify(isError = True,
+                            message = "Failed to save scene",
+                            statusCode = 100,
                             data = {}), 200
 
 @app.route("/testDialogues")
