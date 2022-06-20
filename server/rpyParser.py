@@ -135,26 +135,32 @@ def getResourceListById(projectId):
 
 def writeScriptByProjectId(projectId):
     project = getProjectJsonById(projectId)
-    if project:
-        output = ''
-        # Resources
-        output += writeResources(project['resources'])
-        # Scenes
-        for scene in project['scenes']:
-            output += writeScene(scene)
-
-        # Write file
-        projectInfo = getProjects()[projectId]
-        if projectInfo:
-            try:
-                with open(os.path.join(projectInfo['path'], "game/script.rpy"), 'w') as f:
-                    f.write(output)
-                    print("Wrote script to: "+ projectInfo['path'] + "/script.rpy")
-            except FileNotFoundError:
-                print('The file does not exist.\n')
+    if not project:
+        print('Failed to find project with id of ' + projectId)
+        return False
+    projectInfo = getProjects()[projectId]
+    if not projectInfo:
         print('Failed to write project: ' + project['projectName'])
         return False
-    print('Failed to find project with id of ' + projectId)
+
+    output = ''
+    # Resources
+    output += writeResources(project['resources'], projectInfo)
+    # Scenes
+    for scene in project['scenes']:
+        output += writeScene(scene)
+
+    # Write file
+    if projectInfo:
+        try:
+            with open(os.path.join(projectInfo['path'], "game/script.rpy"), 'w') as f:
+                f.write(output)
+                print("Wrote script to: "+ projectInfo['path'] + "/script.rpy")
+                return True
+        except FileNotFoundError:
+            print('The file does not exist.\n')
+    print('Failed to write project: ' + project['projectName'])
+    return False
 
 def writeScene(scene):
     s = ''
@@ -180,16 +186,20 @@ def writeScene(scene):
             print('unknown type on line with id: '+l['uniqueId']+' on scene: '+scene['name'])
     return s
 
-def writeResources(resources):
+def writeResources(resources, projectInfo):
     s = ''
     for character in resources['character']:
         s += 'image %s = \"%s\"'%(character['name'],character['fileName'])
+        file = shutil.copy(character['fileDir'],os.path.join(projectInfo['path'], 'game', 'images', character['fileName']))
     for background in resources['background']:
         s += 'image %s = \"%s\"'%(background['name'],background['fileName'])
+        file = shutil.copy(background['fileDir'],os.path.join(projectInfo['path'], 'game', 'images', background['fileName']))
     for sfx in resources['sfx']:
         s += 'define audio.%s = \"%s\"'%(sfx['name'],sfx['fileName'])
+        file = shutil.copy(sfx['fileDir'],os.path.join(projectInfo['path'], 'game', 'audio', sfx['fileName']))
     for music in resources['music']:
         s += 'define audio.%s = \"%s\"'%(music['name'],music['fileName'])
+        file = shutil.copy(music['fileDir'],os.path.join(projectInfo['path'], 'game', 'audio', music['fileName']))
     return s
 ##
 ##
