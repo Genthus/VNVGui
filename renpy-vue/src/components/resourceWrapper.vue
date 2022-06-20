@@ -25,6 +25,7 @@ provide("selectedTitle", selectedTitle)
 .tabs {
     width: 100%;
     height: 93%;
+    margin: auto;
 }
 .tabsHeader {
     position: relative;
