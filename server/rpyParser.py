@@ -132,6 +132,65 @@ def getResourceListById(projectId):
         return data
     
     return False
+
+def writeScriptByProjectId(projectId):
+    project = getProjectJsonById(projectId)
+    if project:
+        output = ''
+        # Resources
+        output += writeResources(project['resources'])
+        # Scenes
+        for scene in project['scenes']:
+            output += writeScene(scene)
+
+        # Write file
+        projectInfo = getProjects()[projectId]
+        if projectInfo:
+            try:
+                with open(os.path.join(projectInfo['path'], "game/script.rpy"), 'w') as f:
+                    f.write(output)
+                    print("Wrote script to: "+ projectInfo['path'] + "/script.rpy")
+            except FileNotFoundError:
+                print('The file does not exist.\n')
+        print('Failed to write project: ' + project['projectName'])
+        return False
+    print('Failed to find project with id of ' + projectId)
+
+def writeScene(scene):
+    s = ''
+    for l in scene['lines']:
+        if l['type'] is 'text':
+            # text
+            if l['character'] != '':
+                s += "\t%s \"%s\"\n"%(l["character"],l['text'])
+            else:
+                s += "\t\"%s\"\n"%(l['text'])
+        elif l['type'] is 'show':
+            s += "\tshow %s\n"%(l['text'])
+        elif l['type'] is 'jump':
+            # text
+            s += "\tjump %s\n"%(l['text'])
+        elif l['type'] is 'scene':
+            # text
+            s += "\tscene %s\n"%(l['text'])
+        elif l['type'] is 'script':
+            # text
+            print('no script support')
+        else:
+            print('unknown type on line with id: '+l['uniqueId']+' on scene: '+scene['name'])
+    return s
+
+def writeResources(resources):
+    s = ''
+    for character in resources['character']:
+        s += 'image %s = \"%s\"'%(character['name'],character['fileName'])
+    for background in resources['background']:
+        s += 'image %s = \"%s\"'%(background['name'],background['fileName'])
+    for sfx in resources['sfx']:
+        s += 'define audio.%s = \"%s\"'%(sfx['name'],sfx['fileName'])
+    for music in resources['music']:
+        s += 'define audio.%s = \"%s\"'%(music['name'],music['fileName'])
+    return s
 ##
 ##
 ## Anything beyond this point needs to be changed
