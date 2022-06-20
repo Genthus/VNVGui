@@ -5,7 +5,9 @@
             {{title}}
         </li>
     </ul>
-    <slot></slot>
+    <div class="resources">
+        <slot></slot>
+    </div>
 </div>
 </template>
 
@@ -22,8 +24,7 @@ provide("selectedTitle", selectedTitle)
 <style scoped>
 .tabs {
     width: 100%;
-    height: 100%;
-    margin:auto;
+    height: 93%;
 }
 .tabsHeader {
     position: relative;
@@ -41,5 +42,14 @@ provide("selectedTitle", selectedTitle)
     cursor:pointer;
     transform: 0.4s all ease-out;
     margin-right: 3%;
+}
+
+.resources {
+    border: solid 2px black;
+    border-radius: 11px;
+    display: flex;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    height: 95%;
 }
 </style>

@@ -39,7 +39,7 @@ defineProps([
 }
 .optionBox {
     width: 100%;
-    height: auto;
+    height: 5%;
     flex: none;
     order: 0;
     flex-grow: 0;
