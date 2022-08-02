@@ -34,7 +34,8 @@ export default {
 		}
 	},
 	mounted() {
-		this.fileName = this.file.file.name.split(".")[0]
+		this.fileName = this.file.file.name.split(".")[0].replace(/[^a-zA-Z0-9 -]/g, '')
+		this.$emit('editFileName', this.file, this.fileName)
 		this.fileType = "character"
 	}
 }

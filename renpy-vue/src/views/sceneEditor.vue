@@ -8,7 +8,10 @@
             @addDialogueAt="addDialogueAt"
             @deleteDialogue="deleteDialogue"
             :dialogues="lines"/>
-            <dialogueOptions class="grow bg-white shadow-inner rounded-lg"/>
+            <dialogueOptions class="grow bg-white shadow-inner rounded-lg"
+            :resources="resourceList"
+            :resourcesObject="resourcesObject"
+            @reloadResources="loadResources"/>
         </div>
     </div>
 </template>
@@ -24,20 +27,20 @@ const id = ref(0)
 const name = ref("")
 const lines = ref([])
 const uniqueId = ref(0)
+const resourceList = ref([])
+const resourcesObject = ref([])
 
 function loadDialogues(sceneId) {
-    fetch("http://localhost:5000/testProject").then(response => {
+    fetch("http://localhost:5000/getScene?projectId=" + route.params.projectId + '&sceneId=' + sceneId).then(response => {
         if (!response.ok) {
             throw new Error("Request failed")
         }
         return response.json()
     })
     .then(data => {
-        const scene = data.scenes[sceneId]
-        console.log(scene)
-        id.value = scene.id
-        name.value = scene.name
-        lines.value = scene.lines
+        id.value = data.id
+        name.value = data.name
+        lines.value = data.lines
         lines.value.forEach(l => {
             l.uniqueId = uniqueId.value++;
         });
@@ -45,8 +48,22 @@ function loadDialogues(sceneId) {
     .catch(error => console.log(error))
 }
 
+function loadResources() {
+    fetch("http://localhost:5000/getResourceList?projectId=" + route.params.projectId).then(response => {
+        if (!response.ok) {
+            throw new Error("Request failed")
+        }
+        return response.json()
+    })
+    .then(data => {
+        resourceList.value = Object.keys(data)
+        resourcesObject.value = data
+    })
+    .catch(error => console.log(error))
+}
+
 async function saveScene() {
-    await fetch("http://localhost:5000/saveScene", {
+    await fetch("http://localhost:5000/saveScene?projectId=" + route.params.projectId + '&sceneId='+route.params.sceneId, {
         method: 'POST',
         headers: {
             'Accept' : 'application/json',
@@ -89,7 +106,8 @@ function deleteDialogue(i) {
 }
 
 onMounted (()=> {
-    loadDialogues(route.params.id)
+    loadDialogues(route.params.sceneId)
+    loadResources()
 })
 
 </script>

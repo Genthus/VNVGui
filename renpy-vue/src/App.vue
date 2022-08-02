@@ -10,8 +10,11 @@
           <router-link to="/" class="block py-2 pr-4 pl-3 text-white bg-purple-700 rounded bg-transparent p-0">Project View</router-link>
         </ul>
       </div>
+    <div class="links">
+      <router-link :to="{name: 'projectView', params: {projectId: route.params.projectId}}" class="projectView" v-if="hasProject">Project View</router-link>
     </div>
+    <router-link to="/projects" class="projectManager" @click="hasProject = false">Project Manager</router-link>
   </nav>
-  <router-view class="h-screen"/>
+  <router-view @projectLoaded="hasProject = true" class="h-screen"/>
 </div>
 </template>
