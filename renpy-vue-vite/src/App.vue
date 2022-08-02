@@ -1,68 +1,17 @@
 <template>
-<div class="container">
-  <nav>
-    <h1>Renpy Vue</h1>
-    <div class="options">
-      
+<div class="min-h-full bg-gray-100">
+  <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded">
+    <div class="container flex flex-wrap justify-between items-center mx-auto">
+      <div class="flex items-center">
+        <span class="self-center text-xl font-semibold whitespace-nowrap">Renpy Vue</span>
       </div>
-    <div class="links">
-      <router-link to="/">Project View</router-link>
+      <div class="block w-auto">
+        <ul class="flex flex-row p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 space-x-8 mt-0  text-sm font-medium border-0 bg-white">
+          <router-link to="/" class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded bg-transparent p-0">Project View</router-link>
+        </ul>
+      </div>
     </div>
   </nav>
   <router-view/>
 </div>
 </template>
-
-<script setup>
-//const project = {}
-</script>
-
-<style>
-body {
-  background:#121212;
-}
-
-.container {
-  width: 100%;
-  height: 100%;
-}
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  position:absolute;
-  width: 100%;
-  height: 50px;
-  top: 0;
-  left:0;
-  background: #5647ae;
-  display: flex;
-  justify-content: left;
-  align-content: center;
-  padding: 0 5%;
-}
-
-.links {
-  padding: 1%;
-  margin: 0 5%;
-}
-
-nav a {
-  font-weight: bold;
-  color: #ffffff;
-}
-
-h1 {
-  color:#000000;
-}
-
-nav a.router-link-exact-active {
-  color: #bc9eec;
-}
-</style>

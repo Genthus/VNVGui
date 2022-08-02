@@ -1,12 +1,15 @@
 <template>
-    <div class="sceneEditor">
-        <dialogueView @save="saveScene" 
-        @updateDialogue="updateDialogue" 
-        @addDialogue="addDialogue" 
-        @addDialogueAt="addDialogueAt"
-        @deleteDialogue="deleteDialogue"
-        :dialogues="lines"/>
-        <dialogueOptions/>
+    <div class="w-screen bg-slate-100 p-4 m-auto">
+        <div class="flex flex-row gap-4 scroll-m-0">
+            <dialogueView class="basis-3/4 bg-white shadow-inner rounded-lg"
+            @save="saveScene" 
+            @updateDialogue="updateDialogue" 
+            @addDialogue="addDialogue" 
+            @addDialogueAt="addDialogueAt"
+            @deleteDialogue="deleteDialogue"
+            :dialogues="lines"/>
+            <dialogueOptions class="grow bg-white shadow-inner rounded-lg"/>
+        </div>
     </div>
 </template>
 
@@ -90,19 +93,3 @@ onMounted (()=> {
 })
 
 </script>
-
-<style scoped>
-.sceneEditor {
-    position: absolute;
-    top:5%;
-    left:0%;
-    width: 100%;
-    height: 90%;
-    padding: 1%;
-    background: #121212;
-    display: flex;
-    flex-direction: row;
-    gap: 1%;
-    align-items: flex-start;
-}
-</style>

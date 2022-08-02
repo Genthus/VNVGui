@@ -1,8 +1,8 @@
 <template>
-    <div class="bar">
-        <div class="buttons">
-            <button @click="$emit('addDialogueAt')">New Line</button>
-            <button @click="$emit('save')">Save</button>
+    <div class="bg-white rounded-lg">
+        <div class="p-2 flex flex-wrap justify-center items-center gap-4">
+            <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="$emit('addDialogueAt')">New Line</button>
+            <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="$emit('save')">Save</button>
         </div>
     </div>
 </template>
@@ -12,24 +12,3 @@ export default {
     name: 'highlightTools',
 }
 </script>
-
-<style scoped>
-.bar {
-    width: 100%;
-    padding: 0.5% 0%;
-    flex: none;
-    background: #f0f0f0;
-    border-radius: 11px;
-    justify-content: left;
-}
-
-.buttons {
-    top:50%;
-    display:flex;
-    justify-content: center;
-}
-
-button {
-    margin: 3px 1%;
-}
-</style>

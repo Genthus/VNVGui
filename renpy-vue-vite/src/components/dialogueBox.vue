@@ -1,27 +1,25 @@
 <template>
-    <div class="dialogueBox" :class="newDialogue.type">
-        <div class="typeButtons" v-if="newDialogue.type == ''">
-            <button @click="setType('text')">Text</button>
-            <button @click="setType('jump')">Jump</button>
-            <button @click="setType('show')">Show</button>
-            <button @click="setType('scene')">Scene</button>
-            <button @click="setType('script')">Script</button>
-            <button @click="$emit('deleteDialogue')">Delete</button>
+    <div class="p-4 relative" :class="newDialogue.type">
+        <div class="flex flex-row justify-center gap-8 mx-auto" v-if="newDialogue.type == ''">
+            <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="setType('text')">Text</button>
+            <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="setType('jump')">Jump</button>
+            <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="setType('show')">Show</button>
+            <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="setType('scene')">Scene</button>
+            <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="setType('script')">Script</button>
+            <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="$emit('deleteDialogue')">Delete</button>
         </div>
-        <form action="" v-if="dialogue.type != ''">
-            <div class="type">
-                <input @change="updateDialogue" v-model="newDialogue.type" placeholder="newDialogue.type">
+        <form class="space-y-4" action="" v-if="dialogue.type != ''">
+            <div class="bg-white/50 rounded-lg absolute top-0 right-0 p-2 flex flex-wrap flex-row gap-3">
+                <span class="text-md text-right">{{newDialogue.type}}</span>
+                <span class="text-md text-right">{{newDialogue.id}}</span>
+                <svg @click="$emit('deleteDialogue')" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </div>
-            <div class="idNumber">
-                <input @change="updateDialogue" type="number" v-model="newDialogue.id" placeholder="newDialogue.id">
-            </div>
-            <div class="character" v-if="newDialogue.type === 'text'">
+            <div class="bg-white block w-2/3 text-xl shadow-inner rounded-lg p-3" v-if="newDialogue.type === 'text'">
                 <input @change="updateDialogue" v-model="newDialogue.character" placeholder="{{newDialogue.character}}"/>
             </div>
-            <div class="textBox">
+            <div class="bg-white block w-full text-xl shadow-inner rounded-lg p-3">
                 <textarea @change="updateDialogue" v-model="newDialogue.text" placeholder="{{newDialogue.text}}"></textarea>
             </div>
-            <button @click="$emit('deleteDialogue')">Delete</button>
         </form>
     </div>
 </template>
@@ -47,65 +45,3 @@ function setType(t) {
     newDialogue.value.type = t;
 }
 </script>
-
-<style scoped>
-.dialogueBox {
-    width: 100%;
-    height: auto;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    background: #EDEDED;
-    border-radius: 11px;
-    justify-content: center;
-}
-
-form {
-    padding: 1%;
-}
-
-.character {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 21px;
-}
-
-.text  {
-    
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 14px;
-}
-
-.typeButtons {
-    padding: 2%;
-    display:flex;
-    justify-content: center;
-}
-
-.typeButtons button {
-    width: 100px;
-    height: 100px;
-    margin: 0 2%;
-}
-
-.text {
-    background: rgb(80, 126, 218);
-}
-.jump {
-    background: #92e052;
-}
-.show {
-    background: #e463d3;
-}
-.scene {
-    background: #e9d060;
-}
-.script {
-    background: #ee7171;
-}
-</style>

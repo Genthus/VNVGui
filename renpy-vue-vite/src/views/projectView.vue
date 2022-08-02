@@ -1,8 +1,13 @@
 <template>
-<div class="projectView">
-    <ul class="scenes" :key="scene.id" v-for="scene in scenes">
-      <button @click="changeScene(scene.id)">{{scene.name}}</button>
-    </ul>
+<div class="w-full h-80 bg-slate-100">
+    <div class="max-w-sm shadow-md mt-3 rounded-lg p-6 m-auto bg-slate-400 ">
+        <span class="mb-2 text-lg font-bold tracking-tight text-white">Scenes</span>
+        <div class="flex flex-wrap flex-col justify-center p-2 items-center">
+            <ul :key="scene.id" v-for="scene in scenes">
+              <button class="bg-white rounded-lg w-64 p-3 mt-4 text-lg font-medium" @click="changeScene(scene.id)">{{scene.name}}</button>
+            </ul>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -35,26 +40,3 @@ onMounted(() => {
     loadProject()
 })
 </script>
-
-<style scoped>
-.projectView {
-    position: absolute;
-    width: 100%;
-    height: 95%;
-    top:5%;
-    left:0%;
-    background: #121212;
-}
-
-.scenes {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-button {
-    width: 10%;
-    padding: 1% 0%;
-}
-</style>

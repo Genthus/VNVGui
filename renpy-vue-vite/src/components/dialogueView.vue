@@ -1,6 +1,6 @@
 <template>
-    <div class="dialogueView">
-        <div class="dialogueBoxes" :key="dialogue.uniqueId" v-for="dialogue in dialogues">
+    <div class="flex flex-nowrap flex-col p-2">
+        <div class="bg-blue-100 mt-3 rounded-lg shadow-md" :key="dialogue.uniqueId" v-for="dialogue in dialogues">
             <highlightTools 
             v-if="dialogue.highlight == true" 
             @addDialogueAt="$emit('addDialogueAt',dialogue.id)" @save="$emit('save')"/>
@@ -51,23 +51,3 @@ function selectComponent(id) {
     });
 }
 </script>
-
-<style scoped>
-.dialogueView {
-    position:relative;
-    width: 70%;
-    height: 92%;
-    overflow-y: scroll;
-    background: #2a2929;
-    border-radius: 11px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1%;
-    padding:1%;
-    border-radius: 11px;
-}
-.dialogueBoxes {
-    width: 100%;
-}
-</style>
