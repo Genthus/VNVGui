@@ -1,8 +1,9 @@
 <template>
-<div class="h-screen bg-gray-100">
-  <nav class="basis-1/10 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded">
-    <div class="container flex flex-wrap justify-between items-center mx-auto">
+<div class="min-h-screen max-h-screen flex flex-col bg-blue-300 py-2">
+  <nav class="w-11/12 mx-auto px-12 rounded-full bg-white border-gray-200 shadow-md p-2">
+    <div class="flex flex-wrap justify-between items-center mx-auto">
       <div class="flex items-center">
+        <svg class="mr-3 h-6 sm:h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
         <span class="self-center text-xl font-semibold whitespace-nowrap">Renpy Vue</span>
       </div>
       <div class="block w-auto">
@@ -19,7 +20,7 @@
       </div>
     </div>
   </nav>
-  <router-view @projectLoaded="hasProject = true" class="h-screen"/>
+  <router-view @projectLoaded="hasProject = true" class="grow overflow-hidden"/>
 </div>
 </template>
 

@@ -1,18 +1,16 @@
 <template>
-    <div class="w-screen bg-slate-100 p-4">
-        <div class="h-full flex flex-row gap-4 scroll-m-0">
-            <dialogueView class="basis-3/4 bg-white shadow-inner rounded-lg"
-            @save="saveScene" 
-            @updateDialogue="updateDialogue" 
-            @addDialogue="addDialogue" 
-            @addDialogueAt="addDialogueAt"
-            @deleteDialogue="deleteDialogue"
-            :dialogues="lines"/>
-            <dialogueOptions class="grow bg-white shadow-inner rounded-lg"
-            :resources="resourceList"
-            :resourcesObject="resourcesObject"
-            @reloadResources="loadResources"/>
-        </div>
+    <div class="flex flex-row gap-4 p-4">
+        <dialogueView class="basis-3/4 bg-white shadow-inner rounded-xl"
+        @save="saveScene" 
+        @updateDialogue="updateDialogue" 
+        @addDialogue="addDialogue" 
+        @addDialogueAt="addDialogueAt"
+        @deleteDialogue="deleteDialogue"
+        :dialogues="lines"/>
+        <dialogueOptions class="grow bg-white shadow-inner rounded-xl"
+        :resources="resourceList"
+        :resourcesObject="resourcesObject"
+        @reloadResources="loadResources"/>
     </div>
 </template>
 

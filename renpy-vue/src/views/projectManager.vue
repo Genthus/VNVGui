@@ -1,6 +1,6 @@
 <template>
-<div class="w-full h-80 bg-slate-100">
-    <div class="max-w-sm shadow-md mt-3 rounded-lg p-6 m-auto bg-slate-400">
+<div class="w-full">
+    <div class="container shadow-md mt-3 rounded-lg p-6 m-auto bg-purple-400">
         <span class="mb-2 text-lg font-bold tracking-tight text-white">Projects</span>
         <div class="flex flex-wrap flex-col justify-center p-2 items-center">
             <ul class="projects" :key="project.id" v-for="project in projects">
