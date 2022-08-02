@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-nowrap flex-col p-2">
+    <div class="flex flex-col flex-nowrap overflow-auto p-2">
         <div class="bg-blue-100 mt-3 rounded-lg shadow-md" :key="dialogue.uniqueId" v-for="dialogue in dialogues">
             <highlightTools 
             v-if="dialogue.highlight == true" 

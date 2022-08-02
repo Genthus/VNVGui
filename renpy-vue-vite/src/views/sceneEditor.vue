@@ -1,6 +1,6 @@
 <template>
-    <div class="w-screen bg-slate-100 p-4 m-auto">
-        <div class="flex flex-row gap-4 scroll-m-0">
+    <div class="w-screen bg-slate-100 p-4">
+        <div class="h-full flex flex-row gap-4 scroll-m-0">
             <dialogueView class="basis-3/4 bg-white shadow-inner rounded-lg"
             @save="saveScene" 
             @updateDialogue="updateDialogue" 
