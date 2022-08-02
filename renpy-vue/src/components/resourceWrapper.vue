@@ -1,11 +1,11 @@
 <template>
-<div class="tabs">
-    <ul class="tabsHeader">
-        <li v-for="title in tabTitles" :key="title" @click="selectedTitle = title">
+<div class="w-full flex flex-col">
+    <ul class="flex flex-wrap text-sm text-center border-b">
+        <li :class="{'bg-blue-400' : selectedTitle == title}" class="mr-2 inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-blue-300" v-for="title in tabTitles" :key="title" @click="selectedTitle = title">
             {{title}}
         </li>
     </ul>
-    <div class="resources">
+    <div class="grow">
         <slot></slot>
     </div>
 </div>
@@ -20,37 +20,3 @@ const selectedTitle = ref('character')
 
 provide("selectedTitle", selectedTitle)
 </script>
-
-<style scoped>
-.tabs {
-    width: 100%;
-    height: 93%;
-    margin: auto;
-}
-.tabsHeader {
-    position: relative;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-.tabsHeader li {
-    text-align: center;
-    padding: 2%;
-    background-color: aliceblue;
-    border-radius: 11px;
-    cursor:pointer;
-    transform: 0.4s all ease-out;
-    margin-right: 3%;
-}
-
-.resources {
-    border: solid 2px black;
-    border-radius: 11px;
-    display: flex;
-    overflow-y: scroll;
-    flex-wrap: wrap;
-    height: 95%;
-}
-</style>

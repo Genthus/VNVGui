@@ -1,7 +1,7 @@
 <template>
-<div class="resourceFile">
-    <component :is="tag" class ='file-preview'>
-        <img :src="imageFile" :alt="fileName.name" :title="fileName.name">
+<div class="w-full flex flex-row flex-grow-0 items-center">
+    <component :is="tag" class ='relative w-full h-48 p-2 aspect-square overflow-hidden bg-blue-200 rounded-lg'>
+        <img class="block h-full w-full object-scale-down" :src="imageFile" :alt="fileName.name" :title="fileName.name">
     </component>
 </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
-    <div class="notif">
-        <dropZone class="drop-area" @files-dropped="addFiles" #default="{ dropZoneActive }">
+    <div class="container h-5/6 bg-white rounded-xl shadow-xl border border-purple-600 flex flex-col justify-center items-center p-2">
+        <dropZone class="bg-slate-100 shadow-inner items-center flex flex-col overflow-auto" @files-dropped="addFiles" #default="{ dropZoneActive }">
                 <label for="file-input">
                     <span v-if="dropZoneActive">
                         <span>Drop Them Here</span>
@@ -14,16 +14,16 @@
                     </span>
                     <input type="file" id="file-input" multiple @change="onInputChange" />
                 </label>
-                <ul class="image-list" v-show="files.length">
-                    <filePreview  v-for="file  of  files" :key="file.id" :file="file"  tag="li" 
+                <ul class="w-full flex flex-col items-center overflow-scroll" v-show="files.length">
+                    <filePreview v-for="file  of  files" :key="file.id" :file="file"  tag="li" 
 					@remove="removeFile" 
 					@editFileType="editFileType"
 					@editFileName="editFileName"/>
                 </ul>
         </dropZone>
-        <button @click.prevent="uploadFiles(files)"  class="upload-button">Upload</button>
+        <button @click.prevent="uploadFiles(files)"  class="p-3 m-2 w-96 bg-purple-500 rounded-lg justify-center text-white shadow-md">Upload</button>
         <br>
-        <button @click="close">Close</button>
+        <button class="p-3 w-96 bg-blue-500 rounded-lg justify-center text-white shadow-md" @click="close">Close</button>
     </div>
 </template>
 

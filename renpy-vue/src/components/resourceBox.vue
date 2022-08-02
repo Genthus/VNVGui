@@ -1,9 +1,8 @@
 <template> 
-<div class="resourceBox" v-show="title == selectedTitle">
-    <ul class="files">
+<div class="" v-show="title == selectedTitle">
+    <ul class="flex flex-col flex-wrap overflow-scroll gap-2 p-2">
         <resourceFile :key="fileName.fileName" v-for="fileName of fileNames" :fileName="fileName" tag="li"/>
     </ul>
-    <slot></slot>
 </div>
 </template>
 
