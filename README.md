@@ -7,10 +7,12 @@
 - Vite
 - TailwindCSS
 
+### Server
+- flask 
+- flask-cors
+
+## Dev installation
 ```
 cd renpy-Vue
 npm install
 ```
-### Server
-- flask 
-- flask-cors
