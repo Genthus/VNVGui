@@ -1,25 +1,27 @@
 <template>
     <div class="flex flex-col flex-nowrap overflow-scroll p-2">
-        <div class="bg-blue-100 mt-3 rounded-lg shadow-md" :key="dialogue.uniqueId" v-for="dialogue in dialogues">
-            <highlightTools 
-            v-if="dialogue.highlight == true" 
-            @addDialogueAt="$emit('addDialogueAt',dialogue.id)" @save="$emit('save')"/>
-            <dialogueBox 
-            @updateDialogue="updateDialogue" 
-            @deleteDialogue="$emit('deleteDialogue', dialogue.id)"
-            @click="selectComponent(dialogue.id)"
-            :dialogue="dialogue"/>
-            <highlightTools 
-            v-if="dialogue.highlight == true" 
-            @addDialogueAt="$emit('addDialogueAt',dialogue.id+1)" @save="$emit('save')"/>
-        </div>
+        <draggable class="bg-blue-100  rounded-lg shadow-md" 
+        :list="dialogues" 
+        :group="{name:'people', pull: 'clone', put: false}" 
+        item-key="uniqueId"
+        @end="$emit('updateNumbers')">
+            <template #item="{element}">
+                <dialogueBox 
+                @updateDialogue="updateDialogue" 
+                @deleteDialogue="$emit('deleteDialogue', element.id)"
+                @click="selectComponent(element.id)"
+                @save="$emit('save')"
+                @addDialogueAt="$emit('addDialogueAt',element.id)"
+                :dialogue="element"/>
+            </template>
+        </draggable>
     </div>
 </template>
 
 <script setup>
 import dialogueBox from './dialogueBox.vue'
-import highlightTools from './highlightTools.vue'
 import {ref} from 'vue'
+import draggable from "vuedraggable"
 
 const props = defineProps({
     dialogues: Array
@@ -30,7 +32,8 @@ const emit = defineEmits([
     'updateDialogue',
     'addDialogue',
     'addDialogueAt',
-    'deleteDialogue'
+    'deleteDialogue',
+    'updateNumbers'
 ])
 
 const currentHightlight = ref(0)

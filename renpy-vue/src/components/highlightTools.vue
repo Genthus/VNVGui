@@ -7,8 +7,9 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'highlightTools',
-}
+<script setup>
+defineEmits([
+    'save',
+    'addDialogueAt'
+])
 </script>

@@ -6,6 +6,7 @@
         @addDialogue="addDialogue" 
         @addDialogueAt="addDialogueAt"
         @deleteDialogue="deleteDialogue"
+        @updateNumbers="updateNumbers"
         :dialogues="lines"/>
         <dialogueOptions class="grow bg-white shadow-inner rounded-xl"
         :resources="resourceList"
@@ -101,6 +102,15 @@ function addDialogueAt(pos) {
 
 function deleteDialogue(i) {
     lines.value.splice(i,1);
+    for (let i = 0; i < lines.value.length; i++) {
+        lines.value[i].id = i;
+    }
+}
+
+function updateNumbers() {
+    for (let i = 0; i < lines.value.length; i++) {
+        lines.value[i].id = i;
+    }
 }
 
 onMounted (()=> {

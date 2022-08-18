@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4 relative rounded-lg" 
+    <div class="p-4 relative rounded-lg mb-4" 
     :class="{
         'bg-green-400': newDialogue.type == 'text',
         'bg-teal-400': newDialogue.type == 'jump',
@@ -27,19 +27,24 @@
             <div class="bg-white block w-full min-h-24 text-lg shadow-inner rounded-lg p-3">
                 <textarea class="w-full min-h-full" @change="updateDialogue" v-model="newDialogue.text" placeholder="{{newDialogue.text}}"></textarea>
             </div>
+            <highlightTools 
+            v-if="dialogue.highlight == true" 
+            @addDialogueAt="$emit('addDialogueAt',dialogue.id)" 
+            @save="$emit('save')"/>
         </form>
     </div>
 </template>
 
 <script setup>
 import {ref} from 'vue'
+import highlightTools from './highlightTools.vue'
 
 const props = defineProps({
     dialogue: Object
 })
 const emit = defineEmits([
     'updateDialogue',
-    'deleteDialogue'
+    'deleteDialogue',
 ])
 
 const newDialogue = ref(props.dialogue)
