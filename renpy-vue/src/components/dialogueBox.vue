@@ -5,6 +5,8 @@
         'bg-teal-400': newDialogue.type == 'jump',
         'bg-blue-400': newDialogue.type == 'show',
         'bg-red-400': newDialogue.type == 'scene',
+        'bg-purple-400': newDialogue.type == 'sfx',
+        'bg-orange-400': newDialogue.type == 'music',
         'bg-yellow-400': newDialogue.type == 'script',
     }">
         <div class="flex flex-row justify-center gap-8 mx-auto" v-if="newDialogue.type == ''">
@@ -12,6 +14,8 @@
             <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="setType('jump')">Jump</button>
             <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="setType('show')">Show</button>
             <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="setType('scene')">Scene</button>
+            <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="setType('sfx')">SFX</button>
+            <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="setType('music')">Music</button>
             <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="setType('script')">Script</button>
             <button class="bg-indigo-500 block py-4 px-12 rounded-md shadow-md text-white" @click="$emit('deleteDialogue')">Delete</button>
         </div>

@@ -165,21 +165,27 @@ def writeScriptByProjectId(projectId):
 def writeScene(scene):
     s = ''
     for l in scene['lines']:
-        if l['type'] is 'text':
+        if l['type'] == 'text':
             # text
             if l['character'] != '':
                 s += "\t%s \"%s\"\n"%(l["character"],l['text'])
             else:
                 s += "\t\"%s\"\n"%(l['text'])
-        elif l['type'] is 'show':
+        elif l['type'] == 'show':
             s += "\tshow %s\n"%(l['text'])
-        elif l['type'] is 'jump':
+        elif l['type'] == 'jump':
             # text
             s += "\tjump %s\n"%(l['text'])
-        elif l['type'] is 'scene':
+        elif l['type'] == 'scene':
             # text
             s += "\tscene %s\n"%(l['text'])
-        elif l['type'] is 'script':
+        elif l['type'] == 'sfx':
+            # text
+            s += "\tplay sound %s\n"%(l['text'])
+        elif l['type'] == 'music':
+            # text
+            s += "\tplay music %s\n"%(l['text'])
+        elif l['type'] == 'script':
             # text
             print('no script support')
         else:
@@ -201,78 +207,18 @@ def writeResources(resources, projectInfo):
         s += 'define audio.%s = \"%s\"'%(music['name'],music['fileName'])
         file = shutil.copy(music['fileDir'],os.path.join(projectInfo['path'], 'game', 'audio', music['fileName']))
     return s
+
+def createProject(name):
+    if not os.exists(os.path.join(projectsFolder,name)):
+        shutil.copytree(baseProjectFolder,os.path.join(projectsFolder,name))
+        return True
+    print("Project with that name already exists")
+    return False
+        
+
+
 ##
 ##
 ## Anything beyond this point needs to be changed
 ##
 ##
-
-class Project:
-    name = ""
-    baseDirectory = ""
-    projectObject = ''
-    projectScenes = []
-
-    def __init__(self, name):
-        self.name = name
-        self.baseDirectory = os.path.join(projectsFolder, name)
-    
-    def setDirectory(self, directory):
-        self.baseDirectory = directory
-
-    def writeScriptToFile(self):
-        output = ''
-        for scene in self.projectScenes:
-            output += scene.writeScene()
-        try:
-            with open(os.path.join(self.baseDirectory, "game/script.rpy"), 'w') as f:
-                f.write(output)
-                print("Wrote script to: "+ self.baseDirectory + "script.rpy")
-        except FileNotFoundError:
-            print('The file does not exist.\n')
-    
-    def parseProjectJSON(self):
-        # Load json file
-        projFileExists = os.exists(os.path.join(self.baseDirectory, "project.json"))
-        if projFileExists:
-            with open(os.path.join(self.baseDirectory,"project.json"), "r") as f: 
-                self.ProjectObject = json.load(f)
-                print("Project JSON file loaded")
-        else:
-            print("Project JSON file was not found\n")
-            return
-
-        # Convert scenes
-        for scene in self.ProjectObject["scenes"]:
-            self.projectScenes.append(RpyScene(scene,self.ProjectObject["scenes"][scene]))
-        self.ProjectObject["scenes"]
-        
-
-def createProject(name):
-    if not os.exists(os.path.join(projectsFolder,name)):
-        shutil.copytree(baseProjectFolder,os.path.join(projectsFolder,name))
-        newProj = Project(name)
-        newProj.setDirectory(os.path.join(projectsFolder,name))
-        return newProj
-    else:
-        print("Project with that name already exists")
-
-def openProject(name):
-    if os.exists(os.path.join(projectsFolder,name)):
-        return Project(name)
-
-
-
-class RpyScene:
-    name = "tempName"
-    sceneContent = ["tempItem", "tempItem2"]
-
-    def __init__(self, name, sceneContent):
-        self.name = name
-        self.sceneContent = sceneContent
-    
-    def writeScene(self):
-        s = "label %s:\n"%self.name
-        for l in self.sceneContent:
-            s += "    %s\n"%l
-        return s

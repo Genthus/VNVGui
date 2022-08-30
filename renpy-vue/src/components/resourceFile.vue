@@ -1,7 +1,7 @@
 <template>
 <div class="w-full flex flex-row flex-grow-0 items-center">
     <component :is="tag" class ='relative w-full h-48 p-2 aspect-square overflow-hidden bg-blue-200 rounded-lg'>
-        <img class="block h-full w-full object-scale-down" :src="imageFile" :alt="fileName.name" :title="fileName.name">
+        <img class="block h-full w-full object-scale-down" :src="imageFile" :alt="fileName[1].name" :title="fileName[1].name">
     </component>
 </div>
 </template>
@@ -11,7 +11,7 @@ import { useRoute } from 'vue-router';
 const route = useRoute()
 const props = defineProps({
     tag: {type: String, default: 'li'},
-    'fileName' : Object
+    'fileName' : []
 })
 
 const imageFile = ref({})
@@ -19,7 +19,7 @@ const imageFile = ref({})
 async function getFileImage() {
     const response = await fetch("http://localhost:5000/getFile?projectId=" 
                                 + route.params.projectId 
-                                + "&fileDir="+props.fileName.fileDir, {
+                                + "&fileDir="+props.fileName[1].fileDir, {
         method: 'GET',
     });
     const blob = await response.blob()
@@ -28,7 +28,9 @@ async function getFileImage() {
 }
 
 onMounted(() => {
+	console.log(props.fileName)
     getFileImage()
+
 })
 </script>
 

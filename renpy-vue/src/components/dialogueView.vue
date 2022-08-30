@@ -2,7 +2,7 @@
     <div class="flex flex-col flex-nowrap overflow-scroll p-2">
         <draggable class="bg-blue-100  rounded-lg shadow-md" 
         :list="dialogues" 
-        :group="{name:'people', pull: 'clone', put: false}" 
+        :group="{name:'people'}" 
         item-key="uniqueId"
         @end="$emit('updateNumbers')">
             <template #item="{element}">

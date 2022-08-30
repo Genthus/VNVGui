@@ -1,21 +1,36 @@
 <template> 
 <div class="" v-show="title == selectedTitle">
-    <ul class="flex flex-col flex-wrap overflow-scroll gap-2 p-2">
-        <resourceFile :key="fileName.fileName" v-for="fileName of fileNames" :fileName="fileName" tag="li"/>
-    </ul>
+    <draggable class="flex flex-col flex-wrap overflow-scroll gap-2 p-2"
+    :list = "Object.entries(fileNames)"
+    :group="{name:'people', pull: 'clone', put: false}" 
+    :clone="placeResource"
+    item-key="fileName">
+        <template #item="{element}">
+            <resourceFile :fileName="element" tag="li"/>
+        </template>
+    </draggable>
 </div>
 </template>
 
 <script setup>
 import {inject} from 'vue'
 import resourceFile from './resourceFile.vue'
+import draggable from "vuedraggable"
 
-defineProps({
+const props = defineProps({
     'title' : String,
     'fileNames': Object
 })
 const selectedTitle = inject('selectedTitle', 'character')
-console.log(selectedTitle)
+
+function placeResource(element) {
+    return {
+        text: element[1].fileName,
+        type: (element[1].type == 'character' ? 'show' : (element[1].type == 'background' ? 'scene' : (element[1].type == 'sfx' ? 'sfx' : 'music'))),
+        id: -1
+    }
+}
+
 </script>
 
 <style scoped>

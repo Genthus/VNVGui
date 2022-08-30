@@ -32,6 +32,21 @@ def getProject():
     projectData = rpyParser.getProjectJsonById(projectId)
     return jsonify(projectData)
 
+@app.route('/createProject')
+def createProject():
+    projectName = request.args.get('name')
+    if rpyParser.createProject(projectName):
+        return jsonify(isError = False,
+                        message = "Project created",
+                        statusCode = 200,
+                        data = {}), 200
+    else:
+        return jsonify(isError = True,
+                        message = "Error creating project",
+                        statusCode = 100,
+                        data = {}), 100
+
+
 @app.route('/getScene')
 def getScene():
     projectId = request.args.get('projectId')
