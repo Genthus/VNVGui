@@ -1,6 +1,6 @@
 <template>
 <div class="w-full">
-    <div class="container shadow-md mt-3 rounded-lg p-6 m-auto bg-slate-400 ">
+    <div class="container shadow-md mt-3 rounded-lg p-6 m-auto bg-green-400 ">
         <span class="mb-2 text-lg font-bold tracking-tight text-white">{{name}}</span>
         <div class="flex flex-wrap flex-col justify-center p-2 items-center">
             <ul :key="scene.id" v-for="scene in scenes">
@@ -11,8 +11,8 @@
                 <teleport to="body">
                     <div class="absolute bg-purple-500 bg-opacity-20 top-0 left-0 w-screen h-screen flex justify-center items-center" v-if="newSceneOpen">
                         <div class="w-1/2 h-2/6 bg-white rounded-xl shadow-xl border border-purple-600 flex flex-col justify-center items-center p-2">
-                            <input class="rounded-lg text-lg mb-2 p-2 w-64 border border-blue-700 font-semibold" placeholder="new Scene"/>
-                            <button class="bg-blue-700 text-white rounded-lg w-64 p-3 mt-4 text-lg font-medium" @click="">Create</button>
+                            <input class="rounded-lg text-lg mb-2 p-2 w-64 border border-blue-700 font-semibold" v-model="newSceneName" placeholder="new Scene"/>
+                            <button class="bg-blue-700 text-white rounded-lg w-64 p-3 mt-4 text-lg font-medium" @click="createScene(newSceneName)">Create</button>
                             <button class="bg-purple-700 text-white rounded-lg w-32 p-3 mt-4 text-md font-medium" @click="newSceneOpen = false">Close</button>
                         </div>
                     </div>
@@ -37,6 +37,7 @@ const emit = defineEmits([
 const scenes = ref(0)
 const name = ref('')
 const newSceneOpen = ref(false)
+const newSceneName = ref("")
 
 function changeScene(id) {
     router.push({name: 'sceneEditor', params: {projectId: route.params.projectId, sceneId: id}})
@@ -55,6 +56,17 @@ function loadProject(projectId) {
         emit('projectLoaded')
     })
     .catch(error => console.log(error))
+}
+
+async function createScene(name) {
+    const response =  await fetch("http://localhost:5000/createScene?projectId=" + route.params.projectId + '&name='+ name)
+    if (!response.ok) {
+        console.log('failed to create scene')
+    }
+    else {
+        loadProject(route.params.projectId)
+        newSceneOpen.value = false;
+    }
 }
 
 onMounted(() => {

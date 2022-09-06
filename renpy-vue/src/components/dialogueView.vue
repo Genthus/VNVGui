@@ -15,6 +15,7 @@
                 :dialogue="element"/>
             </template>
         </draggable>
+        <HighlightTools v-if="dialogues.length == 0"/>
     </div>
 </template>
 
@@ -22,6 +23,8 @@
 import dialogueBox from './dialogueBox.vue'
 import {ref} from 'vue'
 import draggable from "vuedraggable"
+import highlightTools from './highlightTools.vue';
+import HighlightTools from './highlightTools.vue';
 
 const props = defineProps({
     dialogues: Array

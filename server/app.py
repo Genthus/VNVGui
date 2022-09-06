@@ -59,6 +59,21 @@ def getScene():
                     statusCode = 100,
                     data = {}), 100
 
+@app.route('/createScene')
+def createScene():
+    projectId = request.args.get('projectId')
+    newSceneName = request.args.get('name')
+    if (rpyParser.createNewScene(projectId,newSceneName)):
+        return jsonify(isError = False,
+                        message = "Scene created",
+                        statusCode = 200,
+                        data = {}), 200
+    else:
+        return jsonify(isError = True,
+                        message = "Error creating scene",
+                        statusCode = 100,
+                        data = {}), 100
+
 @app.route('/getResourceList')
 def getResourceList():
     projectId = request.args.get('projectId')

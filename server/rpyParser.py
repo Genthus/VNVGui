@@ -27,6 +27,26 @@ def getProjectJsonById(id):
     return False
 
 # Overwrites scene object by its index
+def createNewScene(projId, name):
+    projects = getProjects()
+    projectPath = ''
+    project = projects['projects'][int(projId)]
+    if project:
+        projectPath = project['path']
+    if projectPath != '':
+        with open(os.path.join(projectPath,'project.json'), 'r+') as f:
+            data = json.load(f)
+            if (data["scenes"]):
+                newScene = {"id": len(data["scenes"]), "name": name, "lines": []}
+                data["scenes"].append(newScene)
+                f.seek(0)
+                f.truncate()
+                json.dump(data, f)
+                return True
+            else:
+                return False
+
+# Overwrites scene object by its index
 def overWriteSceneById(projId, sceneId, scene):
     projects = getProjects()
     projectPath = ''
@@ -209,8 +229,15 @@ def writeResources(resources, projectInfo):
     return s
 
 def createProject(name):
-    if not os.exists(os.path.join(projectsFolder,name)):
+    if not os.path.exists(os.path.join(projectsFolder,name)):
         shutil.copytree(baseProjectFolder,os.path.join(projectsFolder,name))
+        if 'project.json' in os.listdir(os.path.join(projectsFolder,name)):
+            with open(os.path.join(os.path.join(projectsFolder,name), 'project.json'), "r+") as f: 
+                data = json.load(f)
+                data['projectName'] = name
+                f.seek(0)
+                f.truncate()
+                json.dump(data, f)
         return True
     print("Project with that name already exists")
     return False
