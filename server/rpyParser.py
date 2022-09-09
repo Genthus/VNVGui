@@ -26,6 +26,20 @@ def getProjectJsonById(id):
     print('Error loading project with id:' + id + ' at path: ' + projectPath)
     return False
 
+def saveProjectJsonById(id, data):
+    projects = getProjects()
+    projectPath = ''
+    project = projects['projects'][int(id)]
+    if project:
+        projectPath = project['path']
+    if projectPath != '':
+        with open(os.path.join(projectPath,'project.json'), 'w') as f:
+            f.seek(0)
+            f.truncate()
+            json.dump(data,f)
+            return True
+    return False
+
 # Overwrites scene object by its index
 def createNewScene(projId, name):
     projects = getProjects()
@@ -65,23 +79,39 @@ def overWriteSceneById(projId, sceneId, scene):
             else:
                 return False
 
+def deleteScene(projId, sceneId):
+    projects = getProjects()
+    projectPath = ''
+    project = projects['projects'][projId]
+    if project:
+        projectPath = project['path']
+    if projectPath != '':
+        with open(os.path.join(projectPath,'project.json'), 'r+') as f:
+            data = json.load(f)
+            if (data["scenes"][sceneId]):
+                del data["scenes"][sceneId]
+                f.seek(0)
+                f.truncate()
+                json.dump(data, f)
+                return True
+            else:
+                return False
 # Takes data of new resource file and adds it to project.json
-def saveResourceFile(projName, name, type, fileName, fileDir):
-    with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
-        data = json.load(f)
-        if 'resources' not in data:
-            data["resources"] = {}
-        if type not in data["resources"]:
-            data["resources"][type] = {}
+def saveResourceFile(projId, name, type, fileName, fileDir):
+    data = getProjectJsonById(projId)
+    if 'resources' not in data:
+        data["resources"] = {}
+    if type not in data["resources"]:
+        data["resources"][type] = {}
 
-        if name in data["resources"][type]:
-            print("data exists")
-        else:
-            data["resources"][type][name] = {'name': name,'type': type,'fileName': fileName, 'fileDir': fileDir}
-        f.seek(0)
-        f.truncate()
-        json.dump(data, f)
+    if name in data["resources"][type]:
+        print("data exists")
+    else:
+        data["resources"][type][name] = {'name': name,'type': type,'fileName': fileName, 'fileDir': fileDir}
+    
+    if saveProjectJsonById(projId, data):
         return True
+    return False
 
 # Finds jump instructions inside scenes and adds them to a key in the root of project.json
 def setJumps(projName):
@@ -148,10 +178,7 @@ def getResourceListById(projectId):
         print('resource list not in project.json for project: ' + projectId)
         return False
     data = projectData['resources']
-    if data:
-        return data
-    
-    return False
+    return data
 
 def writeScriptByProjectId(projectId):
     project = getProjectJsonById(projectId)

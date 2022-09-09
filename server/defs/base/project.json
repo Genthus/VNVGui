@@ -1,20 +1,32 @@
 {
-    "projectName" : "",
-    "characters" : [
-
-    ],
-    "scenes" : {
-        "start" : [
-            "\"welcome to RenpyGUI\"",
-            "\"this is the test Scene\"",
-            "goto intro"
-        ],
-        "intro" : [
-            "\"You can edit this script as you want\"",
-            "\"Good luck\""
-        ]
-    },
-    "options" : [
-
-    ]
+    "projectName": "example",
+    "characters": [],
+    "scenes": [{
+        "id": 0,
+        "name": "start",
+        "lines": [{
+            "character": "Renpy Helper",
+            "highlight": false,
+            "id": 0,
+            "text": "\"welcome to RenpyGUI\"",
+            "type": "text",
+            "uniqueId": 0
+        }, {
+            "character": "Renpy Helper",
+            "highlight": false,
+            "id": 1,
+            "text": "\"this is the test Scene\"",
+            "type": "text",
+            "uniqueId": 1
+        }, {
+            "character": "",
+            "highlight": true,
+            "id": 2,
+            "text": "intro",
+            "type": "jump",
+            "uniqueId": 2
+        }]
+    }],
+    "options": [],
+    "resources": {}
 }

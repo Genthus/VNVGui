@@ -4,7 +4,14 @@
         <span class="mb-2 text-lg font-bold tracking-tight text-white">{{name}}</span>
         <div class="flex flex-wrap flex-col justify-center p-2 items-center">
             <ul :key="scene.id" v-for="scene in scenes">
-              <button class="bg-white rounded-lg w-64 p-3 mt-4 text-lg font-medium" @click="changeScene(scene.id)">{{scene.name}}</button>
+                <div class="relative bg-white rounded-lg w-64 p-3 mt-4 text-lg font-medium">
+                    <div class="bg-white cursor-pointer mr-5" @click="changeScene(scene.id)">
+                        <h3 class="text-lg font-bold">{{scene.name}}</h3>
+                    </div>
+                    <div class="bg-slate-200/50 rounded-l-lg absolute top-0 right-0 p-2 flex flex-wrap flex-row gap-3">
+                        <svg @click="deleteScene(scene.id)" class="w-6 h-6 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </div>
+                </div>
             </ul>
             <div class="relative">
                 <button class="bg-blue-700 text-white rounded-lg w-64 p-3 mt-4 text-lg font-medium" @click="newSceneOpen = true">New Scene</button>
@@ -66,6 +73,16 @@ async function createScene(name) {
     else {
         loadProject(route.params.projectId)
         newSceneOpen.value = false;
+    }
+}
+
+async function deleteScene(id) {
+    const response =  await fetch("http://localhost:5000/deleteScene?projectId=" + route.params.projectId + '&id='+ id)
+    if (!response.ok) {
+        console.log('failed to create scene')
+    }
+    else {
+        loadProject(route.params.projectId)
     }
 }
 

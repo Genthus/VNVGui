@@ -125,7 +125,7 @@ def uploadResource():
             os.mkdir(projectDir)
         hashedFileName = str(hash(projectName + form.name.data + form.type.data)) + pathlib.Path(file.filename).suffix
         file.save(os.path.join(projectDir,secure_filename(hashedFileName)))
-        rpyParser.saveResourceFile(projectName, form.name.data, form.type.data, hashedFileName, os.path.join(app.config['UPLOAD_FOLDER'],'project_'+str(projectId),secure_filename(hashedFileName)))
+        rpyParser.saveResourceFile(projectId, form.name.data, form.type.data, hashedFileName, os.path.join(app.config['UPLOAD_FOLDER'],'project_'+str(projectId),secure_filename(hashedFileName)))
         return jsonify(isError = False,
                         message = "File Uploaded",
                         statusCode = 200,
