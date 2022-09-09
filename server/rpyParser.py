@@ -185,7 +185,7 @@ def writeScriptByProjectId(projectId):
     if not project:
         print('Failed to find project with id of ' + projectId)
         return False
-    projectInfo = getProjects()[projectId]
+    projectInfo = getProjects()['projects'][projectId]
     if not projectInfo:
         print('Failed to write project: ' + project['projectName'])
         return False
@@ -240,7 +240,7 @@ def writeScene(scene):
     return s
 
 def writeResources(resources, projectInfo):
-    s = ''
+    s = "" 
     for character in resources['character']:
         s += 'image %s = \"%s\"'%(character['name'],character['fileName'])
         file = shutil.copy(character['fileDir'],os.path.join(projectInfo['path'], 'game', 'images', character['fileName']))

@@ -87,6 +87,21 @@ def createScene():
                         statusCode = 100,
                         data = {}), 100
 
+@app.route('/deleteScene')
+def deleteScene():
+    projectId = request.args.get('projectId')
+    sceneId = request.args.get('id')
+    if (rpyParser.deleteScene(int(projectId),int(sceneId))):
+        return jsonify(isError = False,
+                        message = "Scene deleted",
+                        statusCode = 200,
+                        data = {}), 200
+    else:
+        return jsonify(isError = True,
+                        message = "Error deleting scene",
+                        statusCode = 100,
+                        data = {}), 100
+
 
 @app.route('/getResourceList')
 def getResourceList():
@@ -154,17 +169,20 @@ def saveScene():
                             statusCode = 100,
                             data = {}), 200
 
-@app.route("/testDialogues")
-def testDialogues():
-    proj = rpyParser.getProjectJson(projectName)
-    data = {'dialogues': proj['scenes']}
-    return jsonify(data)
+@app.route("/parse")
+def parseProject():
+    projectId = request.args.get('projectId')
+    if (rpyParser.writeScriptByProjectId(int(projectId))):
+        return jsonify(isError = False,
+                        message = "parsing completed",
+                        statusCode = 200,
+                        data = {}), 200
+    else:
+        return jsonify(isError = True,
+                        message = "Error parsing project",
+                        statusCode = 100,
+                        data = {}), 100
 
-@app.route("/testProject")
-def testProject():
-    proj = rpyParser.getProjectJson(projectName)
-    data = {'scenes': proj['scenes']}
-    return jsonify(data)
 
 
 if __name__ == '__main__':

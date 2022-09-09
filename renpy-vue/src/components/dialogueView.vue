@@ -15,7 +15,9 @@
                 :dialogue="element"/>
             </template>
         </draggable>
-        <HighlightTools v-if="dialogues.length == 0"/>
+        <HighlightTools v-if="dialogues.length == 0"
+        @addDialogueAt="$emit('addDialogueAt',0)" 
+        @save="$emit('save')"/>
     </div>
 </template>
 

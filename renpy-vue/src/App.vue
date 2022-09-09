@@ -8,6 +8,10 @@
       </div>
       <div class="block w-auto">
         <ul class="flex flex-row p-4 bg-gray-50 rounded-lg border-gray-100 space-x-8 mt-0  text-sm font-medium border-0 ">
+          <div
+          class="block py-2 pr-4 pl-3 text-white bg-teal-700 rounded p-0"
+          @click="parseProject"
+          v-if="hasProject">Parse</div>
           <router-link
           class="block py-2 pr-4 pl-3 text-white bg-purple-700 rounded p-0"
           :to="{name: 'projectView', params: {projectId: route.params.projectId}}"  
@@ -30,4 +34,13 @@ import {ref} from 'vue'
 import {useRoute} from 'vue-router'
 const route = useRoute()
 const hasProject = ref(false)
+
+async function parseProject() {
+    const response =  await fetch("http://localhost:5000/parse?projectId=" + route.params.projectId)
+    if (!response.ok) {
+        console.log('failed to parse project')
+    }
+    else {
+    }
+}
 </script>
