@@ -242,10 +242,9 @@ def createProject(name):
     print("Project with that name already exists")
     return False
         
-
-
-##
-##
-## Anything beyond this point needs to be changed
-##
-##
+def deleteProject(name):
+    if os.path.exists(os.path.join(projectsFolder,name)):
+        shutil.rmtree(os.path.join(projectsFolder,name))
+        return True
+    print("Failed to delete project")
+    return False

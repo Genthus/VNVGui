@@ -3,8 +3,16 @@
     <div class="container shadow-md mt-3 rounded-lg p-6 m-auto bg-purple-400">
         <span class="mb-2 text-lg font-bold tracking-tight text-white">Projects</span>
         <div class="flex flex-wrap flex-col justify-center p-2 items-center">
-            <ul class="projects" :key="project.id" v-for="project in projects">
-              <button class="bg-white rounded-lg w-64 p-3 mt-4 text-lg font-medium" @click="setProject(project.id)">{{project.name}}</button>
+            <ul class="" :key="project.id" v-for="project in projects">
+                <div class="relative bg-white rounded-lg w-64 p-3 mt-4 text-lg font-medium">
+                    <div class="bg-white cursor-pointer mr-5" @click="setProject(project.id)">
+                        <span class="text-lg text-right font-bold">{{project.id}}</span>
+                        <span class="text-lg text-right font-bold">{{project.name}}</span>
+                    </div>
+                    <div class="bg-slate-200/50 rounded-l-lg absolute top-0 right-0 p-2 flex flex-wrap flex-row gap-3">
+                        <svg @click="deleteProject(project.name)" class="w-6 h-6 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </div>
+                </div>
             </ul>
             <div class="relative">
                 <button class="bg-blue-700 text-white rounded-lg w-64 p-3 mt-4 text-lg font-medium" @click="newProjectOpen = true">New Project</button>
@@ -59,6 +67,16 @@ async function createProject(name) {
     else {
         getProjects();
         newProjectOpen.value = false;
+    }
+}
+
+async function deleteProject(name) {
+    const response = await fetch('http://localhost:5000/deleteProject?name=' + name);
+    if (!response.ok) {
+        console.log('failed to delete project')
+    }
+    else {
+        getProjects();
     }
 }
 

@@ -46,6 +46,19 @@ def createProject():
                         statusCode = 100,
                         data = {}), 100
 
+@app.route('/deleteProject')
+def deleteProject():
+    projectName = request.args.get('name')
+    if rpyParser.deleteProject(projectName):
+        return jsonify(isError = False,
+                        message = "Project deleted",
+                        statusCode = 200,
+                        data = {}), 200
+    else:
+        return jsonify(isError = True,
+                        message = "Error deleting project",
+                        statusCode = 100,
+                        data = {}), 100
 
 @app.route('/getScene')
 def getScene():
@@ -73,6 +86,7 @@ def createScene():
                         message = "Error creating scene",
                         statusCode = 100,
                         data = {}), 100
+
 
 @app.route('/getResourceList')
 def getResourceList():
