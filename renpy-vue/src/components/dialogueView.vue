@@ -25,7 +25,6 @@
 import dialogueBox from './dialogueBox.vue'
 import {ref} from 'vue'
 import draggable from "vuedraggable"
-import highlightTools from './highlightTools.vue';
 import HighlightTools from './highlightTools.vue';
 
 const props = defineProps({

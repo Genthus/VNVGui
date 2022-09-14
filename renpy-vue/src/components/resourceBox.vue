@@ -25,7 +25,7 @@ const selectedTitle = inject('selectedTitle', 'character')
 
 function placeResource(element) {
     return {
-        text: element[1].fileName,
+        text: element[1].name,
         type: (element[1].type == 'character' ? 'show' : (element[1].type == 'background' ? 'scene' : (element[1].type == 'sfx' ? 'sfx' : 'music'))),
         id: -1
     }

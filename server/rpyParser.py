@@ -211,27 +211,28 @@ def writeScriptByProjectId(projectId):
 
 def writeScene(scene):
     s = ''
+    s += 'label ' + scene['name'] + ':\n'
     for l in scene['lines']:
         if l['type'] == 'text':
             # text
             if l['character'] != '':
-                s += "\t%s \"%s\"\n"%(l["character"],l['text'])
+                s += "    \"%s\" \"%s\"\n"%(l["character"],l['text'].replace('\"','\\\"'))
             else:
-                s += "\t\"%s\"\n"%(l['text'])
+                s += "    \"%s\"\n"%(l['text'].replace('\"','\\\"'))
         elif l['type'] == 'show':
-            s += "\tshow %s\n"%(l['text'])
+            s += "    show %s\n"%(l['text'])
         elif l['type'] == 'jump':
             # text
-            s += "\tjump %s\n"%(l['text'])
+            s += "    jump %s\n"%(l['text'])
         elif l['type'] == 'scene':
             # text
-            s += "\tscene %s\n"%(l['text'])
+            s += "    scene %s\n"%(l['text'])
         elif l['type'] == 'sfx':
             # text
-            s += "\tplay sound %s\n"%(l['text'])
+            s += "    play sound %s\n"%(l['text'])
         elif l['type'] == 'music':
             # text
-            s += "\tplay music %s\n"%(l['text'])
+            s += "    play music %s\n"%(l['text'])
         elif l['type'] == 'script':
             # text
             print('no script support')
@@ -243,19 +244,19 @@ def writeResources(resources, projectInfo):
     s = "" 
     if 'character' in resources:
         for character in resources['character'].values():
-            s += 'image %s = \"%s\"'%(character['name'],character['fileName'])
+            s += 'image %s = \"%s\"\n'%(character['name'],character['fileName'])
             file = shutil.copy(character['fileDir'],os.path.join(projectInfo['path'], 'game', 'images', character['fileName']))
     if 'background' in resources:
         for background in resources['background'].values():
-            s += 'image %s = \"%s\"'%(background['name'],background['fileName'])
+            s += 'image %s = \"%s\"\n'%(background['name'],background['fileName'])
             file = shutil.copy(background['fileDir'],os.path.join(projectInfo['path'], 'game', 'images', background['fileName']))
     if 'sfx' in resources:
         for sfx in resources['sfx'].values():
-            s += 'define audio.%s = \"%s\"'%(sfx['name'],sfx['fileName'])
+            s += 'define audio.%s = \"%s\"\n'%(sfx['name'],sfx['fileName'])
             file = shutil.copy(sfx['fileDir'],os.path.join(projectInfo['path'], 'game', 'audio', sfx['fileName']))
     if 'music' in resources:
         for music in resources['music'].values():
-            s += 'define audio.%s = \"%s\"'%(music['name'],music['fileName'])
+            s += 'define audio.%s = \"%s\"\n'%(music['name'],music['fileName'])
             file = shutil.copy(music['fileDir'],os.path.join(projectInfo['path'], 'game', 'audio', music['fileName']))
     return s
 
