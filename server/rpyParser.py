@@ -241,18 +241,22 @@ def writeScene(scene):
 
 def writeResources(resources, projectInfo):
     s = "" 
-    for character in resources['character']:
-        s += 'image %s = \"%s\"'%(character['name'],character['fileName'])
-        file = shutil.copy(character['fileDir'],os.path.join(projectInfo['path'], 'game', 'images', character['fileName']))
-    for background in resources['background']:
-        s += 'image %s = \"%s\"'%(background['name'],background['fileName'])
-        file = shutil.copy(background['fileDir'],os.path.join(projectInfo['path'], 'game', 'images', background['fileName']))
-    for sfx in resources['sfx']:
-        s += 'define audio.%s = \"%s\"'%(sfx['name'],sfx['fileName'])
-        file = shutil.copy(sfx['fileDir'],os.path.join(projectInfo['path'], 'game', 'audio', sfx['fileName']))
-    for music in resources['music']:
-        s += 'define audio.%s = \"%s\"'%(music['name'],music['fileName'])
-        file = shutil.copy(music['fileDir'],os.path.join(projectInfo['path'], 'game', 'audio', music['fileName']))
+    if 'character' in resources:
+        for character in resources['character'].values():
+            s += 'image %s = \"%s\"'%(character['name'],character['fileName'])
+            file = shutil.copy(character['fileDir'],os.path.join(projectInfo['path'], 'game', 'images', character['fileName']))
+    if 'background' in resources:
+        for background in resources['background'].values():
+            s += 'image %s = \"%s\"'%(background['name'],background['fileName'])
+            file = shutil.copy(background['fileDir'],os.path.join(projectInfo['path'], 'game', 'images', background['fileName']))
+    if 'sfx' in resources:
+        for sfx in resources['sfx'].values():
+            s += 'define audio.%s = \"%s\"'%(sfx['name'],sfx['fileName'])
+            file = shutil.copy(sfx['fileDir'],os.path.join(projectInfo['path'], 'game', 'audio', sfx['fileName']))
+    if 'music' in resources:
+        for music in resources['music'].values():
+            s += 'define audio.%s = \"%s\"'%(music['name'],music['fileName'])
+            file = shutil.copy(music['fileDir'],os.path.join(projectInfo['path'], 'game', 'audio', music['fileName']))
     return s
 
 def createProject(name):
