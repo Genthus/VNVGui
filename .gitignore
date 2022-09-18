@@ -10,3 +10,6 @@ __pycache__
 server/venv/pyvenv.cfg
 # resourceFiles
 server/static/files/*
+
+server/dist/*
+server/build/*
