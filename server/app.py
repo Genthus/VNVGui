@@ -158,7 +158,7 @@ def saveScene():
         sceneId = request.args.get('sceneId')
         scene = request.get_json(force=True)
         if (rpyParser.overWriteSceneById(int(projectId),int(sceneId),scene)):
-            rpyParser.setJumps(projectName)
+            rpyParser.setJumps(projectId)
             return jsonify(isError = False,
                             message = "Success",
                             statusCode = 200,

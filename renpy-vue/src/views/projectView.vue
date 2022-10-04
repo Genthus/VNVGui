@@ -1,5 +1,6 @@
 <template>
 <div class="w-full">
+    <sceneGraph :scenes="scenes" :jumps="jumps"/>
     <div class="container shadow-md mt-3 rounded-lg p-6 m-auto bg-green-400 ">
         <span class="mb-2 text-lg font-bold tracking-tight text-white">{{name}}</span>
         <div class="flex flex-wrap flex-col justify-center p-2 items-center">
@@ -33,6 +34,7 @@
 <script setup>
 import {ref,onMounted} from 'vue'
 import {useRouter, useRoute} from 'vue-router'
+import sceneGraph from '../components/sceneGraph.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -41,8 +43,9 @@ const emit = defineEmits([
     'projectLoaded'
 ])
 
-const scenes = ref(0)
+const scenes = ref([])
 const name = ref('')
+const jumps = ref([])
 const newSceneOpen = ref(false)
 const newSceneName = ref("")
 
@@ -60,6 +63,7 @@ function loadProject(projectId) {
     .then(data => {
         scenes.value = data.scenes
         name.value = data.projectName
+        jumps.value = data.jumps
         emit('projectLoaded')
     })
     .catch(error => console.log(error))

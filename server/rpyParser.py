@@ -114,10 +114,9 @@ def saveResourceFile(projId, name, type, fileName, fileDir):
     return False
 
 # Finds jump instructions inside scenes and adds them to a key in the root of project.json
-def setJumps(projName):
-    with open(os.path.join(projectsFolder,projName,"project.json"), 'r+') as f:
-        data = json.load(f)
-
+def setJumps(projId):
+    data = getProjectJsonById(projId)
+    if data:
         jumps = []
         if 'scenes' not in data:
             data['scenes'] = {}
@@ -131,9 +130,7 @@ def setJumps(projName):
             data['jumps'] = []
         data['jumps'] = jumps
 
-        f.seek(0)
-        f.truncate()
-        json.dump(data, f)
+        saveProjectJsonById(projId, data)
         return True
 
 # Searches through the project folder and registers found projects into projects.json
