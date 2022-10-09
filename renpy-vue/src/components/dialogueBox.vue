@@ -4,7 +4,7 @@
         'bg-green-400': newDialogue.type == 'text',
         'bg-teal-400': newDialogue.type == 'jump',
         'bg-blue-400': newDialogue.type == 'show',
-        'bg-red-400': newDialogue.type == 'scene',
+        'bg-amber-400': newDialogue.type == 'scene',
         'bg-purple-400': newDialogue.type == 'sfx',
         'bg-orange-400': newDialogue.type == 'music',
         'bg-yellow-400': newDialogue.type == 'script',
