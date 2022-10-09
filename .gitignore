@@ -13,3 +13,7 @@ server/static/files/*
 
 server/dist/*
 server/build/*
+
+renpy-vue/dist/
+renpy-vue/dist-electron/
+renpy-vue/release/

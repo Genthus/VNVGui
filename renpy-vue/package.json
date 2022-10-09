@@ -2,11 +2,15 @@
   "name": "renpy-vue",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "main": "dist-electron/main.js",
+  "author": "",
+  "description": "",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build && electron-builder",
+    "preview": "vite preview",
+    "dist": "electron-builder",
+    "pack": "electron-builder --dir"
   },
   "dependencies": {
     "@braks/vue-flow": "^0.4.40",
@@ -18,12 +22,14 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.0",
-    "@vue/compiler-sfc": "^3.2.37",
+    "@vue/compiler-sfc": "^3.2.40",
     "autoprefixer": "^10.4.8",
     "electron": "^19.0.10",
+    "electron-builder": "^23.6.0",
     "postcss": "^8.4.14",
     "sass": "^1.54.0",
     "tailwindcss": "^3.1.7",
-    "vite": "^3.0.4"
+    "vite": "^3.0.4",
+    "vite-electron-plugin": "^0.4.4"
   }
 }

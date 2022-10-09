@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import electron from 'vite-electron-plugin'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,5 +10,13 @@ export default defineConfig({
       usePolling:true
     }
   },
-  plugins: [vue()]
+  plugins: [
+    vue(),
+    electron({
+      include: ['electron'],
+      transformOptions: {
+        sourcemap: !!process.env.VSCODE_DEBUG,
+      }
+    }),
+  ]
 })
