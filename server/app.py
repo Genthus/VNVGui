@@ -186,4 +186,6 @@ def parseProject():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    isDebug = False
+    rpyParser.setup(isDebug)
+    app.run(debug=isDebug)

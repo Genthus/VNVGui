@@ -11,9 +11,14 @@ server/venv/pyvenv.cfg
 # resourceFiles
 server/static/files/*
 
-server/dist/*
-server/build/*
+server/dist/
+server/build/
+server/config.json
+server/projects/
+server/files/
 
 renpy-vue/dist/
 renpy-vue/dist-electron/
 renpy-vue/release/
+
+release/

@@ -6,7 +6,49 @@ import json
 # Main folder where project directories and projects.json is stored
 projectsFolder = "../projects"
 # Directory for base project
-baseProjectFolder = "./defs/base"
+baseProjectFolder = "./.defs/base"
+filesFolder = "./static/files"
+
+def setup(debug):
+    if (not debug):
+        p = os.path.join(os.getcwd(),'config.json')
+        if (not os.path.exists(p)):
+            createProjectFolder(debug)
+            createFilesFolder(debug)
+            with open(p, 'w') as f:
+                data = {
+                    'projectsFolder' : os.path.join(os.getcwd(),'./projects'),
+                    'filesFolder' : os.path.join(os.getcwd(), './files')
+                }
+                json.dump(data,f)
+            return True
+        else:
+            with open(p,'r') as f:
+                data = json.load(f)
+                global projectsFolder
+                projectsFolder = data['projectsFolder']
+                global filesFolder
+                filesFolder = data['filesFolder']
+
+def createProjectFolder(debug):
+    if (not debug):
+        p = os.path.join(os.getcwd(),'projects')
+        if (not os.path.exists(p)):
+            os.mkdir(p)
+        if (not os.path.exists(os.path.join(p,'projects.json'))):
+            with open(os.path.join(p,'projects.json'), 'w') as f:
+                f.write('{}')
+            return True
+    return False
+
+# Startup
+def createFilesFolder(debug):
+    if (not debug):
+        p = os.path.join(os.getcwd(),'files')
+        if (not os.path.exists(p)):
+            os.mkdir(p)
+        return True
+    return False
 
 # Searches for a project with proJname in the projects folder, returns project.json
 def getProjectJson(proJname):
