@@ -9,7 +9,7 @@ import rpyParser
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'testKey'
-app.config['UPLOAD_FOLDER'] = 'static/files'
+app.config['UPLOAD_FOLDER'] = 'files'
 CORS(app)
 
 projectName = 'test'
@@ -136,11 +136,12 @@ def uploadResource():
         projectDir = os.path.join(os.path.abspath(os.path.dirname(__file__))
                                 ,app.config['UPLOAD_FOLDER']
                                 ,'project_' + str(projectId))
+        projectDir = os.path.join(rpyParser.filesFolder, 'project_' + (str(projectId)))
         if not os.path.isdir(projectDir):
             os.mkdir(projectDir)
         hashedFileName = str(hash(projectName + form.name.data + form.type.data)) + pathlib.Path(file.filename).suffix
         file.save(os.path.join(projectDir,secure_filename(hashedFileName)))
-        rpyParser.saveResourceFile(projectId, form.name.data, form.type.data, hashedFileName, os.path.join(app.config['UPLOAD_FOLDER'],'project_'+str(projectId),secure_filename(hashedFileName)))
+        rpyParser.saveResourceFile(projectId, form.name.data, form.type.data, hashedFileName, os.path.join(projectDir,secure_filename(hashedFileName)))
         return jsonify(isError = False,
                         message = "File Uploaded",
                         statusCode = 200,
