@@ -28,5 +28,6 @@
         }]
     }],
     "options": [],
-    "resources": {}
+    "resources": {},
+    "jumps": []
 }

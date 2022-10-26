@@ -37,7 +37,7 @@
 import {ref,onMounted} from 'vue'
 import {useRouter} from 'vue-router'
 import {useVuelidate} from '@vuelidate/core'
-import {required} from '@vuelidate/validators'
+import {required, minLength, maxLength, alphaNum} from '@vuelidate/validators'
 
 const router = useRouter()
 
@@ -45,11 +45,16 @@ const projects = ref([])
 
 const newProjectOpen = ref(false);
 const newProjData = ref({
-    name : ""
+    name : "newProject"
 })
 
 const rules = {
-    name : {required}
+    name : {
+        required,
+        minLength: minLength(1),
+        maxLength: maxLength(15),
+        alphaNum
+    }
 }
 
 const v$ = useVuelidate(rules, newProjData)

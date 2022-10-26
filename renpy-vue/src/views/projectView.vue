@@ -1,6 +1,6 @@
 <template>
 <div class="w-full">
-    <sceneGraph :scenes="scenes" :jumps="jumps"/>
+    <sceneGraph :scenes="scenes" :jumps="jumps" v-if="!newSceneOpen"/>
     <div class="container shadow-md mt-3 rounded-lg p-6 m-auto bg-green-400 ">
         <span class="mb-2 text-lg font-bold tracking-tight text-white">{{name}}</span>
         <div class="flex flex-wrap flex-col justify-center p-2 items-center">
@@ -19,8 +19,11 @@
                 <teleport to="body">
                     <div class="absolute bg-purple-500 bg-opacity-20 top-0 left-0 w-screen h-screen flex justify-center items-center" v-if="newSceneOpen">
                         <div class="w-1/2 h-2/6 bg-white rounded-xl shadow-xl border border-purple-600 flex flex-col justify-center items-center p-2">
-                            <input class="rounded-lg text-lg mb-2 p-2 w-64 border border-blue-700 font-semibold" v-model="newSceneName" placeholder="new Scene"/>
-                            <button class="bg-blue-700 text-white rounded-lg w-64 p-3 mt-4 text-lg font-medium" @click="createScene(newSceneName)">Create</button>
+                            <input class="rounded-lg text-lg mb-2 p-2 w-64 border border-blue-700 font-semibold" v-model="newSceneData.name"/>
+                            <div class="input-errors" v-for="error of v$.name.$errors" :key="error.$uid">
+                                <div class="error-msg">{{ error.$message }}</div>
+                            </div>
+                            <button class="bg-blue-700 text-white rounded-lg w-64 p-3 mt-4 text-lg font-medium" @click="createScene(newSceneData.name)">Create</button>
                             <button class="bg-purple-700 text-white rounded-lg w-32 p-3 mt-4 text-md font-medium" @click="newSceneOpen = false">Close</button>
                         </div>
                     </div>
@@ -35,6 +38,8 @@
 import {ref,onMounted} from 'vue'
 import {useRouter, useRoute} from 'vue-router'
 import sceneGraph from '../components/sceneGraph.vue'
+import {useVuelidate} from '@vuelidate/core'
+import {required, minLength, maxLength, alphaNum} from '@vuelidate/validators'
 
 const router = useRouter()
 const route = useRoute()
@@ -46,8 +51,21 @@ const emit = defineEmits([
 const scenes = ref([])
 const name = ref('')
 const jumps = ref([])
+
+const newSceneData = ref({
+    name: 'newScene'
+})
 const newSceneOpen = ref(false)
-const newSceneName = ref("")
+const rules = {
+    name : {
+        required,
+        minLength: minLength(1),
+        maxLength: maxLength(15),
+        alphaNum
+    }
+}
+
+const v$ = useVuelidate(rules, newSceneData)
 
 function changeScene(id) {
     router.push({name: 'sceneEditor', params: {projectId: route.params.projectId, sceneId: id}})
@@ -70,6 +88,11 @@ function loadProject(projectId) {
 }
 
 async function createScene(name) {
+    const result = await this.v$.$validate()
+    if (!result) {
+        console.log('invalid')
+        return
+    }
     const response =  await fetch("http://localhost:5000/createScene?projectId=" + route.params.projectId + '&name='+ name)
     if (!response.ok) {
         console.log('failed to create scene')
@@ -92,5 +115,6 @@ async function deleteScene(id) {
 
 onMounted(() => {
     loadProject(route.params.projectId)
+    newSceneOpen.value = false
 })
 </script>
