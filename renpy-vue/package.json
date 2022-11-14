@@ -1,10 +1,10 @@
 {
   "name": "renpy-vue",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "main": "dist-electron/main.js",
-  "author": "",
-  "description": "",
+  "author": "Carlos Escalante",
+  "description": "visual editor for renpy scripts",
   "scripts": {
     "dev": "vite ",
     "build": "vite build && electron-builder",
