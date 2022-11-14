@@ -6,13 +6,21 @@
         item-key="uniqueId"
         @end="$emit('updateNumbers')">
             <template #item="{element}">
-                <dialogueBox 
-                @updateDialogue="updateDialogue" 
-                @deleteDialogue="$emit('deleteDialogue', element.id)"
-                @click="selectComponent(element.id)"
-                @save="$emit('save')"
-                @addDialogueAt="$emit('addDialogueAt',element.id)"
-                :dialogue="element"/>
+                <div>
+                    <HighlightTools v-if="element.highlight == true"
+                    @addDialogueAt="$emit('addDialogueAt',element.id)" 
+                    @save="$emit('save')"/>
+                    <dialogueBox 
+                    @updateDialogue="updateDialogue" 
+                    @deleteDialogue="$emit('deleteDialogue', element.id)"
+                    @click="selectComponent(element.id)"
+                    @save="$emit('save')"
+                    @addDialogueAt="$emit('addDialogueAt',element.id)"
+                    :dialogue="element"/>
+                    <HighlightTools v-if="element.highlight == true"
+                    @addDialogueAt="$emit('addDialogueAt',element.id+1)" 
+                    @save="$emit('save')"/>
+                </div>
             </template>
         </draggable>
         <HighlightTools v-if="dialogues.length == 0"

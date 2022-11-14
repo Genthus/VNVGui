@@ -81,7 +81,8 @@ function addDialogue() {
         id: lines.value.length,
         type: '',
         character: '',
-        text: ''
+        text: '',
+        menu: [] 
     }
     lines.value.push(newDialg);
 }
@@ -92,7 +93,8 @@ function addDialogueAt(pos) {
         type: '',
         character: '',
         text: '',
-        uniqueId: uniqueId.value++
+        uniqueId: uniqueId.value++,
+        menu: []
     }
     lines.value.splice(pos,0,newDialg);
     for (let i = 0; i < lines.value.length; i++) {

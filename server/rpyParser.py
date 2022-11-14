@@ -253,7 +253,6 @@ def writeScene(scene):
     s += 'label ' + scene['name'] + ':\n'
     for l in scene['lines']:
         if l['type'] == 'text':
-            # text
             if l['character'] != '':
                 s += "    \"%s\" \"%s\"\n"%(l["character"],l['text'].replace('\"','\\\"'))
             else:
@@ -261,20 +260,22 @@ def writeScene(scene):
         elif l['type'] == 'show':
             s += "    show %s\n"%(l['text'])
         elif l['type'] == 'jump':
-            # text
             s += "    jump %s\n"%(l['text'])
         elif l['type'] == 'scene':
-            # text
             s += "    scene %s\n"%(l['text'])
         elif l['type'] == 'sfx':
-            # text
             s += "    play sound %s\n"%(l['text'])
         elif l['type'] == 'music':
-            # text
             s += "    play music %s\n"%(l['text'])
         elif l['type'] == 'script':
-            # text
             print('no script support')
+        elif l['type'] == 'game end':
+            s += "    return"
+        elif l['type'] == 'menu':
+            s += "menu:\n" 
+            for option in l['menu']:
+                s += "    \"%s\"\n"%(option['text'].replace('\"','\\\"'))
+                s += "        jump %s\n"%(option['destination'])
         else:
             print('unknown type on line with id: '+l['uniqueId']+' on scene: '+scene['name'])
     return s
