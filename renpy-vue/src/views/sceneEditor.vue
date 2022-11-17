@@ -19,8 +19,9 @@
 import dialogueView from '../components/dialogueView.vue'
 import dialogueOptions from '../components/dialogueOptions.vue'
 import {ref, onMounted} from 'vue'
-import {useRoute} from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 const route = useRoute()
+const router = useRouter()
 
 const id = ref(0)
 const name = ref("")
@@ -28,6 +29,11 @@ const lines = ref([])
 const uniqueId = ref(0)
 const resourceList = ref([])
 const resourcesObject = ref([])
+const unsavedChanges = ref(false)
+
+function unsavedChanges() {
+    router.push({path: route.fullPath, params: {unsaved : true}})
+}
 
 function loadDialogues(sceneId) {
     fetch("http://localhost:5000/getScene?projectId=" + route.params.projectId + '&sceneId=' + sceneId).then(response => {
@@ -70,10 +76,12 @@ async function saveScene() {
         },
         body: JSON.stringify({'id': id.value, 'name': name.value,'lines': lines.value})
     });
+    unsavedChanges()
 }
 
 function updateDialogue(dialg) {
     lines.value[dialg.id] = dialg;
+    unsavedChanges()
 }
 
 function addDialogue() {
@@ -85,6 +93,8 @@ function addDialogue() {
         menu: [] 
     }
     lines.value.push(newDialg);
+    updateNumbers()
+    unsavedChanges()
 }
 
 function addDialogueAt(pos) {
@@ -100,6 +110,8 @@ function addDialogueAt(pos) {
     for (let i = 0; i < lines.value.length; i++) {
         lines.value[i].id = i;
     }
+    updateNumbers()
+    unsavedChanges()
 }
 
 function deleteDialogue(i) {
@@ -107,6 +119,8 @@ function deleteDialogue(i) {
     for (let i = 0; i < lines.value.length; i++) {
         lines.value[i].id = i;
     }
+    updateNumbers()
+    unsavedChanges()
 }
 
 function updateNumbers() {

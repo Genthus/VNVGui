@@ -20,8 +20,8 @@
                     <div class="absolute bg-purple-500 bg-opacity-20 top-0 left-0 w-screen h-screen flex justify-center items-center" v-if="newSceneOpen">
                         <div class="w-1/2 h-2/6 bg-white rounded-xl shadow-xl border border-purple-600 flex flex-col justify-center items-center p-2">
                             <input class="rounded-lg text-lg mb-2 p-2 w-64 border border-blue-700 font-semibold" v-model="newSceneData.name"/>
-                            <div class="input-errors" v-for="error of v$.name.$errors" :key="error.$uid">
-                                <div class="error-msg">{{ error.$message }}</div>
+                            <div class="input-errors" v-for="error of errorList" :key="error.id">
+                                <div class="error-msg">{{ error.message }}</div>
                             </div>
                             <button class="bg-blue-700 text-white rounded-lg w-64 p-3 mt-4 text-lg font-medium" @click="createScene(newSceneData.name)">Create</button>
                             <button class="bg-purple-700 text-white rounded-lg w-32 p-3 mt-4 text-md font-medium" @click="newSceneOpen = false">Close</button>
@@ -38,8 +38,7 @@
 import {ref,onMounted} from 'vue'
 import {useRouter, useRoute} from 'vue-router'
 import sceneGraph from '../components/sceneGraph.vue'
-import {useVuelidate} from '@vuelidate/core'
-import {required, minLength, maxLength, alphaNum} from '@vuelidate/validators'
+import { Validate } from '../compositions/inputVal';
 
 const router = useRouter()
 const route = useRoute()
@@ -58,14 +57,13 @@ const newSceneData = ref({
 const newSceneOpen = ref(false)
 const rules = {
     name : {
-        required,
-        minLength: minLength(1),
-        maxLength: maxLength(15),
-        alphaNum
+        required:true,
+        min: 1,
+        max: 15,
+        alphaNum:true
     }
 }
-
-const v$ = useVuelidate(rules, newSceneData)
+const errorList = ref([])
 
 function changeScene(id) {
     router.push({name: 'sceneEditor', params: {projectId: route.params.projectId, sceneId: id}})
@@ -88,9 +86,10 @@ function loadProject(projectId) {
 }
 
 async function createScene(name) {
-    const result = await this.v$.$validate()
-    if (!result) {
+    const result = await Validate({name:name},rules)
+    if (result.length > 0) {
         console.log('invalid')
+        errorList.value = result
         return
     }
     const response =  await fetch("http://localhost:5000/createScene?projectId=" + route.params.projectId + '&name='+ name)

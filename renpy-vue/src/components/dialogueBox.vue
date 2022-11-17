@@ -49,7 +49,6 @@
 
 <script setup>
 import {ref} from 'vue'
-import highlightTools from './highlightTools.vue'
 
 const props = defineProps({
     dialogue: Object
