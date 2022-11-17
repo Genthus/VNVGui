@@ -36,6 +36,7 @@ def getProject():
 def createProject():
     projectName = request.args.get('name')
     if rpyParser.createProject(projectName):
+        rpyParser.discoverProjects()
         return jsonify(isError = False,
                         message = "Project created",
                         statusCode = 200,

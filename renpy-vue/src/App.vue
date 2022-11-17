@@ -39,8 +39,10 @@ async function parseProject() {
     const response =  await fetch("http://localhost:5000/parse?projectId=" + route.params.projectId)
     if (!response.ok) {
         console.log('failed to parse project')
+      alert("Project failed to parse")
     }
     else {
+      alert("Project parsed and sent to folder")
     }
 }
 </script>

@@ -29,7 +29,6 @@ const lines = ref([])
 const uniqueId = ref(0)
 const resourceList = ref([])
 const resourcesObject = ref([])
-const unsavedChanges = ref(false)
 
 function unsavedChanges() {
     router.push({path: route.fullPath, params: {unsaved : true}})

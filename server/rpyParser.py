@@ -292,11 +292,11 @@ def writeResources(resources, projectInfo):
             file = shutil.copy(background['fileDir'],os.path.join(projectInfo['path'], 'game', 'images', background['fileName']))
     if 'sfx' in resources:
         for sfx in resources['sfx'].values():
-            s += 'define audio.%s = \"%s\"\n'%(sfx['name'],sfx['fileName'])
+            s += 'define audio.%s = \"audio/%s\"\n'%(sfx['name'],sfx['fileName'])
             file = shutil.copy(sfx['fileDir'],os.path.join(projectInfo['path'], 'game', 'audio', sfx['fileName']))
     if 'music' in resources:
         for music in resources['music'].values():
-            s += 'define audio.%s = \"%s\"\n'%(music['name'],music['fileName'])
+            s += 'define audio.%s = \"audio/%s\"\n'%(music['name'],music['fileName'])
             file = shutil.copy(music['fileDir'],os.path.join(projectInfo['path'], 'game', 'audio', music['fileName']))
     return s
 
