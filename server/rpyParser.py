@@ -270,11 +270,11 @@ def writeScene(scene):
         elif l['type'] == 'script':
             print('no script support')
         elif l['type'] == 'game end':
-            s += "    return"
+            s += "    return\n"
         elif l['type'] == 'menu':
             s += "menu:\n" 
             for option in l['menu']:
-                s += "    \"%s\"\n"%(option['text'].replace('\"','\\\"'))
+                s += "    \"%s\":\n"%(option['text'].replace('\"','\\\"'))
                 s += "        jump %s\n"%(option['destination'])
         else:
             print('unknown type on line with id: '+l['uniqueId']+' on scene: '+scene['name'])
