@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.3",
   "main": "dist-electron/main.js",
-  "author": "Carlos Escalante",
+  "author": "Genthus",
   "description": "visual editor for renpy scripts",
   "scripts": {
     "dev": "vite ",

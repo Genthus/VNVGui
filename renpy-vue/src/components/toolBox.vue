@@ -9,8 +9,8 @@
 
 <script>
 export default {
-    name: 'toolBox',
-}
+    name: "toolBox",
+};
 </script>
 
 <style scoped>
@@ -20,14 +20,14 @@ export default {
     flex: none;
     order: 0;
     flex-grow: 0;
-    background: #EDEDED;
+    background: #ededed;
     border-radius: 11px;
     justify-content: left;
 }
 
 .buttons {
     padding: 2%;
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
